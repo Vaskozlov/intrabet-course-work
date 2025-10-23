@@ -5,24 +5,22 @@
 4. **Participant** (Участник): id (PK), name, type (team/individual), university_affiliation.
 5. **Bet** (Ставка): id (PK), amount, placement_time, status (active/settled).
 6. **Outcome** (Исход): id (PK), description, is_winner (boolean).
-7. **Odd** (Коэффициент): id (PK), value (decimal), update_time.
-8. **Wallet** (Кошелек): id (PK), balance, currency.
-9. **Transaction** (Транзакция): id (PK), amount, type (deposit/withdrawal/bet/win), timestamp.
-10. **AdminLog** (Журнал администратора): id (PK), action, timestamp, details.
-11. **PaymentMethod** (Метод платежа): id (PK), type (card/bank_transfer), details.
+7. **Wallet** (Кошелек): id (PK), balance, currency.
+8. **Transaction** (Транзакция): id (PK), amount, type (deposit/withdrawal/bet/win), timestamp.
+9. **AdminLog** (Журнал администратора): id (PK), action, timestamp, details.
+10. **PaymentMethod** (Метод платежа): id (PK), type (card/bank_transfer), details.
 
 #### Связи:
-- **User 1:N Wallet** (один пользователь имеет один кошелек, кошелек принадлежит одному пользователю).
+- **User 1:1 Wallet** (один пользователь имеет один кошелек, кошелек принадлежит одному пользователю).
 - **User 1:N Bet** (пользователь размещает много ставок).
 - **Event 1:N Bet** (событие имеет много ставок).
 - **Event 1:N Outcome** (событие имеет несколько возможных исходов).
 - **Event 1:1 Category** (событие относится к одной категории).
-- **Bet 1:1 Odd** (ставка ассоциирована с одним коэффициентом).
 - **Wallet 1:N Transaction** (кошелек имеет много транзакций).
 - **User 1:N AdminLog** (администратор логирует действия; только для ролей admin).
 - **User 1:N PaymentMethod** (пользователь имеет несколько методов платежа).
 - **Participant N:M Event** (многие-ко-многим: участник может быть в нескольких событиях, событие имеет нескольких участников; реализуется через промежуточную сущность ParticipantEvent).
-- **Bet 1:N Outcome** (ставка может быть связана с конкретным исходом для расчета).
+- **Bet 1:1 Outcome** (ставка связана с конкретным исходом).
 
 ![alt text](https://github.com/Vaskozlov/is-course-work/blob/main/docs/data_base_uml.png)
 
@@ -33,18 +31,15 @@
 2. **events**: id SERIAL PRIMARY KEY, name VARCHAR(100), description TEXT, start_time TIMESTAMP, end_time TIMESTAMP, status ENUM('planned', 'ongoing', 'completed'), category_id INT REFERENCES categories(id).
 3. **categories**: id SERIAL PRIMARY KEY, name VARCHAR(50), description TEXT.
 4. **participants**: id SERIAL PRIMARY KEY, name VARCHAR(100), type ENUM('team', 'individual'), university_affiliation VARCHAR(100).
-5. **bets**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), event_id INT REFERENCES events(id), amount DECIMAL(10,2), placement_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, status ENUM('active', 'settled'), odd_id INT REFERENCES odds(id), outcome_id INT REFERENCES outcomes(id).
+5. **bets**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), event_id INT REFERENCES events(id), amount DECIMAL(10,2), placement_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, status ENUM('active', 'settled'), outcome_id INT REFERENCES outcomes(id).
 6. **outcomes**: id SERIAL PRIMARY KEY, event_id INT REFERENCES events(id), description VARCHAR(100), is_winner BOOLEAN.
-7. **odds**: id SERIAL PRIMARY KEY, event_id INT REFERENCES events(id), outcome_id INT REFERENCES outcomes(id), value DECIMAL(5,2), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP.
-8. **wallets**: id SERIAL PRIMARY KEY, user_id INT UNIQUE REFERENCES users(id), balance DECIMAL(10,2) DEFAULT 0, currency VARCHAR(3) DEFAULT 'RUB'.
-9. **transactions**: id SERIAL PRIMARY KEY, wallet_id INT REFERENCES wallets(id), amount DECIMAL(10,2), type ENUM('deposit', 'withdrawal', 'bet', 'win'), timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP.
-10. **admin_logs**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), action VARCHAR(100), timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, details TEXT.
-11. **payment_methods**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), type ENUM('card', 'bank_transfer'), details JSONB.
-12. **participant_events** (для N:M): participant_id INT REFERENCES participants(id), event_id INT REFERENCES events(id), PRIMARY KEY (participant_id, event_id).
+7. **wallets**: id SERIAL PRIMARY KEY, user_id INT UNIQUE REFERENCES users(id), balance DECIMAL(10,2) DEFAULT 0, currency VARCHAR(3) DEFAULT 'RUB'.
+8. **transactions**: id SERIAL PRIMARY KEY, wallet_id INT REFERENCES wallets(id), amount DECIMAL(10,2), type ENUM('deposit', 'withdrawal', 'bet', 'win'), timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP.
+9. **admin_logs**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), action VARCHAR(100), timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, details TEXT.
+10. **payment_methods**: id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), type ENUM('card', 'bank_transfer'), details JSONB.
+11. **participant_events** (для N:M): participant_id INT REFERENCES participants(id), event_id INT REFERENCES events(id), PRIMARY KEY (participant_id, event_id).
 
 ### Реализация в PostgreSQL
-
-Я реализую модель в PostgreSQL. Целостность обеспечивается через PRIMARY KEY, UNIQUE, FOREIGN KEY, CHECK constraints в DDL, и триггерами для сложной логики (например, обновление баланса при ставке).
 
 #### Скрипты DDL
 
@@ -107,14 +102,6 @@ CREATE TABLE outcomes (
     is_winner BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE odds (
-    id SERIAL PRIMARY KEY,
-    event_id INT REFERENCES events(id) ON DELETE CASCADE,
-    outcome_id INT REFERENCES outcomes(id) ON DELETE CASCADE,
-    value DECIMAL(5,2) NOT NULL CHECK (value > 0),
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE wallets (
     id SERIAL PRIMARY KEY,
     user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
@@ -129,7 +116,6 @@ CREATE TABLE bets (
     amount DECIMAL(10,2) NOT NULL CHECK (amount > 0),
     placement_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status bet_status NOT NULL DEFAULT 'active',
-    odd_id INT REFERENCES odds(id) ON DELETE SET NULL,
     outcome_id INT REFERENCES outcomes(id) ON DELETE SET NULL
 );
 
@@ -188,14 +174,18 @@ FOR EACH ROW EXECUTE FUNCTION place_bet_trigger();
 CREATE OR REPLACE FUNCTION settle_bet_trigger() RETURNS TRIGGER AS $$
 DECLARE
     bet_record RECORD;
+    winning_outcome_id INT;
 BEGIN
     IF NEW.status = 'completed' THEN
+        SELECT id INTO winning_outcome_id FROM outcomes WHERE event_id = NEW.id AND is_winner = TRUE;
+        
         FOR bet_record IN SELECT * FROM bets WHERE event_id = NEW.id AND status = 'active' LOOP
-            IF bet_record.outcome_id = (SELECT id FROM outcomes WHERE event_id = NEW.id AND is_winner = TRUE) THEN
-                UPDATE wallets SET balance = balance + (bet_record.amount * (SELECT value FROM odds WHERE id = bet_record.odd_id))
+            IF bet_record.outcome_id = winning_outcome_id THEN
+                -- Просто возвращаем сумму ставки (можно умножить на множитель, например 2x)
+                UPDATE wallets SET balance = balance + (bet_record.amount * 2)
                 WHERE user_id = bet_record.user_id;
                 INSERT INTO transactions (wallet_id, amount, type) 
-                VALUES ((SELECT id FROM wallets WHERE user_id = bet_record.user_id), bet_record.amount * (SELECT value FROM odds WHERE id = bet_record.odd_id), 'win');
+                VALUES ((SELECT id FROM wallets WHERE user_id = bet_record.user_id), bet_record.amount * 2, 'win');
             END IF;
             UPDATE bets SET status = 'settled' WHERE id = bet_record.id;
         END LOOP;
@@ -249,14 +239,9 @@ INSERT INTO outcomes (event_id, description, is_winner) VALUES
 (1, 'SPbU wins', FALSE),
 (2, 'Student A wins', FALSE);
 
-INSERT INTO odds (event_id, outcome_id, value) VALUES 
-(1, 1, 1.5),
-(1, 2, 2.0),
-(2, 3, 1.8);
-
-INSERT INTO bets (user_id, event_id, amount, odd_id, outcome_id) VALUES 
-(1, 1, 100.00, 1, 1),
-(2, 2, 50.00, 3, 3);
+INSERT INTO bets (user_id, event_id, amount, outcome_id) VALUES 
+(1, 1, 100.00, 1),
+(2, 2, 50.00, 3);
 
 INSERT INTO transactions (wallet_id, amount, type) VALUES 
 (1, 200.00, 'deposit'),
@@ -278,15 +263,14 @@ CREATE OR REPLACE FUNCTION place_bet(
     p_user_id INT, 
     p_event_id INT, 
     p_amount DECIMAL, 
-    p_odd_id INT, 
     p_outcome_id INT
 ) RETURNS VOID AS $$
 BEGIN
     IF (SELECT balance FROM wallets WHERE user_id = p_user_id) < p_amount THEN
         RAISE EXCEPTION 'Insufficient balance';
     END IF;
-    INSERT INTO bets (user_id, event_id, amount, odd_id, outcome_id) 
-    VALUES (p_user_id, p_event_id, p_amount, p_odd_id, p_outcome_id);
+    INSERT INTO bets (user_id, event_id, amount, outcome_id) 
+    VALUES (p_user_id, p_event_id, p_amount, p_outcome_id);
     -- Триггер обработает обновление баланса
 END;
 $$ LANGUAGE plpgsql;
@@ -337,17 +321,16 @@ $$ LANGUAGE plpgsql;
 
 На основе прецедентов (регистрация, размещение/просмотр ставок, поиск событий, расчет выигрышей, админ-отчеты). Анализ: частые SELECT по user_id, event_id; JOIN по foreign keys; фильтры по status, timestamp.
 
-Созданные индексы:
+Созданные индексы (в DDL добавить после таблиц):
 
 ```sql
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_events_status ON events(status);
-CREATE INDEX idx_events_start_time ON events(start_time);
-CREATE INDEX idx_bets_user_id ON bets(user_id);
-CREATE INDEX idx_bets_event_id ON bets(event_id);
-CREATE INDEX idx_transactions_wallet_id ON transactions(wallet_id);
-CREATE INDEX idx_outcomes_event_id ON outcomes(event_id);
-CREATE INDEX idx_odds_event_id ON odds(event_id);
+CREATE INDEX idx_users_email ON users(email);  -- Для быстрой аутентификации (прецедент: логин).
+CREATE INDEX idx_events_status ON events(status);  -- Для поиска активных событий (прецедент: просмотр событий).
+CREATE INDEX idx_events_start_time ON events(start_time);  -- Для сортировки по времени (прецедент: расписание).
+CREATE INDEX idx_bets_user_id ON bets(user_id);  -- Для просмотра ставок пользователя (прецедент: история ставок).
+CREATE INDEX idx_bets_event_id ON bets(event_id);  -- Для расчета по событию (прецедент: завершение события).
+CREATE INDEX idx_transactions_wallet_id ON transactions(wallet_id);  -- Для истории транзакций (прецедент: финансовый отчет).
+CREATE INDEX idx_outcomes_event_id ON outcomes(event_id);  -- Для быстрого нахождения исходов (прецедент: расчет выигрыша).
 ```
 
 Обоснование:
@@ -355,4 +338,6 @@ CREATE INDEX idx_odds_event_id ON odds(event_id);
 - **idx_events_status и idx_events_start_time**: Оптимизируют запросы на список событий (например, SELECT * FROM events WHERE status = 'planned' ORDER BY start_time), полезно для бизнес-процесса просмотра и ставок на предстоящие события.
 - **idx_bets_user_id и idx_bets_event_id**: Ускоряют JOIN и GROUP BY в прецедентах истории ставок и расчета выигрышей (например, SELECT SUM(amount) FROM bets WHERE user_id = ?), снижая время на частые операции.
 - **idx_transactions_wallet_id**: Для отчетов по финансам (прецедент: просмотр баланса/транзакций), где много записей.
-- **idx_outcomes_event_id и idx_odds_event_id**: Критично для прецедента завершения события, где нужно быстро обновлять и рассчитывать (UPDATE/SELECT по event_id).
+- **idx_outcomes_event_id**: Критично для прецедента завершения события, где нужно быстро обновлять и рассчитывать (UPDATE/SELECT по event_id).
+
+Эти индексы балансируют чтение/запись, фокусируясь на read-heavy прецедентах (просмотр > запись). В будущем можно мониторить с EXPLAIN ANALYZE.
