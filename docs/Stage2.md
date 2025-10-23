@@ -24,7 +24,7 @@
 - **Participant N:M Event** (многие-ко-многим: участник может быть в нескольких событиях, событие имеет нескольких участников; реализуется через промежуточную сущность ParticipantEvent).
 - **Bet 1:N Outcome** (ставка может быть связана с конкретным исходом для расчета).
 
-![[data_base_uml.png]]
+![alt text](https://github.com/Vaskozlov/is-course-work/blob/main/docs/data_base_uml.png)
 
 ### Построение даталогической модели
 
