@@ -153,50 +153,6 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trig_create_wallet
 AFTER INSERT ON users
 FOR EACH ROW EXECUTE FUNCTION create_wallet();
-
--- Триггер для обновления баланса при размещении ставки (вычитание суммы)
-CREATE OR REPLACE FUNCTION place_bet_trigger() RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.status = 'active' THEN
-        UPDATE wallets SET balance = balance - NEW.amount WHERE user_id = NEW.user_id;
-        INSERT INTO transactions (wallet_id, amount, type) 
-        VALUES ((SELECT id FROM wallets WHERE user_id = NEW.user_id), -NEW.amount, 'bet');
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trig_place_bet
-BEFORE INSERT ON bets
-FOR EACH ROW EXECUTE FUNCTION place_bet_trigger();
-
--- Триггер для расчета выигрыша при завершении события
-CREATE OR REPLACE FUNCTION settle_bet_trigger() RETURNS TRIGGER AS $$
-DECLARE
-    bet_record RECORD;
-    winning_outcome_id INT;
-BEGIN
-    IF NEW.status = 'completed' THEN
-        SELECT id INTO winning_outcome_id FROM outcomes WHERE event_id = NEW.id AND is_winner = TRUE;
-        
-        FOR bet_record IN SELECT * FROM bets WHERE event_id = NEW.id AND status = 'active' LOOP
-            IF bet_record.outcome_id = winning_outcome_id THEN
-                -- Просто возвращаем сумму ставки (можно умножить на множитель, например 2x)
-                UPDATE wallets SET balance = balance + (bet_record.amount * 2)
-                WHERE user_id = bet_record.user_id;
-                INSERT INTO transactions (wallet_id, amount, type) 
-                VALUES ((SELECT id FROM wallets WHERE user_id = bet_record.user_id), bet_record.amount * 2, 'win');
-            END IF;
-            UPDATE bets SET status = 'settled' WHERE id = bet_record.id;
-        END LOOP;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trig_settle_bets
-AFTER UPDATE ON events
-FOR EACH ROW EXECUTE FUNCTION settle_bet_trigger();
 ```
 
 Скрипт для удаления БД (drop_db.sql):
