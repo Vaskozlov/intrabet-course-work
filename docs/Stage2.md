@@ -82,17 +82,10 @@ CREATE TABLE events (
     category_id INT REFERENCES categories(id) ON DELETE SET NULL
 );
 
-CREATE TABLE participants (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    type participant_type NOT NULL,
-    university_affiliation VARCHAR(100)
-);
-
 CREATE TABLE participant_events (
-    participant_id INT REFERENCES participants(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
     event_id INT REFERENCES events(id) ON DELETE CASCADE,
-    PRIMARY KEY (participant_id, event_id)
+    PRIMARY KEY (user_id, event_id)
 );
 
 CREATE TABLE outcomes (
