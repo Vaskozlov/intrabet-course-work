@@ -1,18 +1,41 @@
+
+#set heading(numbering: "1.")
+#show heading: it => text(it.body)
+#outline()
+
+#pagebreak()
+
 = Rest API
+
+== Structures
+
+=== decimal
+decimal(n, m) это просто int, в котором последние m цифр это дробь
+
+=== User
+
+```json
+{
+  "email": string,
+  "login": string,
+  "role": "user" | "admin",
+  "wallet_id": int
+}
+```
+
+=== Outcome
+
+```json
+{
+  "event_id": int,
+  "name": string,
+  "status": "winner" | "looser" | "none"
+}
+```
 
 == GET
 
-== /api/auth/login
-
-Принимает два параметра через URL
-- login: string
-- password: string
-
-Результат работы аналогичен register (только логин и пароль не будет проверяться на соответствие правилу)
-
 == /api/events/list
-
-Требует авторизации?
 
 Принимает два параметра через URL
 - date
@@ -32,6 +55,8 @@
 - status
 
 Возвращает историю ставок. По умолчанию для текущего пользователя, если запрос делает администратор, то при помощи user_id можно посмотреть историю ставок любого пользователя.
+
+Возвращает:
 
 ```json
 {
@@ -57,6 +82,19 @@
 
 == POST
 
+== /api/auth/login
+
+Принимает json
+```json
+{
+  "login": string | "email": string
+  "password": string
+}
+```
+
+Результат работы аналогичен register (только логин и пароль не будет проверяться на соответствие правилу)
+
+
 == /api/auth/register
 
 Принимает json:
@@ -74,9 +112,11 @@
 ```json
 {
   "token_type": "bearer"
-  "user": "user" | "admin"
+  "user": User
 }
 ```
+
+Токен живет 3 дня.
 
 Возвращаемые заголовки:
 - Authorization ("Bearer " + token)
@@ -119,7 +159,7 @@
   "start_time": timestamp
   "end_time": timestamp
   "category_id": category,
-  "outcomes"4: []
+  "outcomes": []
 }
 ```
 
@@ -146,7 +186,6 @@ len(name) < 100
 {
   "event_id": int,
   "outcome_id": int,
-  "wallet_id": int, // do we need this?
   "sum": decimal(10, 2)
 }
 ```
@@ -171,7 +210,6 @@ len(name) < 100
 
 ```json
 {
-  "user_wallet_id": int,
   "sum": decimal(10, 2),
   "transaction_id": string
 }
@@ -183,6 +221,7 @@ len(name) < 100
 
 ```json
 {
+  "user_id": int,
   "status": "blocked" | "none",
   "role": "user" | "admin"
 }
