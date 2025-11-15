@@ -1,6 +1,6 @@
 #### Сущности и их атрибуты:
 1. **User** (Пользователь): id (PK), username, email, password_hash, role (student/teacher/admin), registration_date.
-2. **Event** (Событие): id (PK), name, description, start_time, end_time, status (planned/ongoing/completed).
+2. **Event** (Событие): id (PK), title, description, start_time, end_time, status (planned/ongoing/completed/cancelled).
 3. **Category** (Категория события): id (PK), name (sports/academic/cultural), description.
 4. **Participant** (Участник): id (PK), name, type (team/individual), university_affiliation.
 5. **Bet** (Ставка): id (PK), amount, placement_time, status (active/settled).
