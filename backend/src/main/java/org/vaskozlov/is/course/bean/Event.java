@@ -6,18 +6,20 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-public class Event {
+public class Event implements Serializable {
     @Id
     @JsonbNillable
     @GeneratedValue(strategy = GenerationType.IDENTITY)

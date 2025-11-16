@@ -12,19 +12,19 @@ import java.time.Instant;
 @Data
 @Entity
 @NoArgsConstructor
-public class Bet implements Serializable {
+public class AdminLog implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @NotNull
     @CreationTimestamp
-    private Instant placedAt;
+    private Instant transactionDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "transaction_id", nullable = false)
-    private Transaction transaction;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "outcome_id", nullable = false)
-    private Outcome outcome;
+    @NotNull
+    private String details;
 }

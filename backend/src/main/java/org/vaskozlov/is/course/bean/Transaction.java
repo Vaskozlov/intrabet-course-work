@@ -3,19 +3,18 @@ package org.vaskozlov.is.course.bean;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class Transactions {
+public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,8 +29,13 @@ public class Transactions {
     private BigDecimal amount;
 
     @NotNull
-    TransactionType transactionType;
+    private TransactionType transactionType;
 
     @CreationTimestamp
-    Instant transactionDate;
+    private Instant transactionDate;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="payment_method_id",  nullable = false, unique = true)
+    private PaymentMethod paymentMethod;
 }

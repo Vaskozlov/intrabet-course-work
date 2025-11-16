@@ -5,24 +5,34 @@ import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.vaskozlov.is.course.service.PasswordHasher;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
-public class User {
+@Table(name = "application_users")
+@NoArgsConstructor
+public class User implements Serializable {
+    @Builder
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.passwordHash = PasswordHasher.hashPassword(password.toCharArray());
+    }
+
     @Id
     @JsonbNillable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @NotNull
     @Column(unique = true)
     private String username;
@@ -34,20 +44,15 @@ public class User {
 
     @NotNull
     @JsonbTransient
-    private HashType hashType;
-
-    @NotNull
-    @JsonbTransient
     private String passwordHash;
 
     @NotNull
-    private Role role;
+    private Role role = Role.STUDENT;
 
-    @NotNull
     @CreationTimestamp
     private Instant createdAt;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn("event_id"))
+    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
     private List<Event> events = new ArrayList<>();
 }
