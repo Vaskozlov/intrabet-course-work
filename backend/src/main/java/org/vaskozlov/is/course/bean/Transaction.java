@@ -14,13 +14,13 @@ import java.time.Instant;
 @Data
 @Entity
 @NoArgsConstructor
-public class Transaction implements Serializable {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="wallet_id", nullable = false, unique = true)
+    @JoinColumn(name = "wallet_id", nullable = false, unique = true)
     private Wallet wallet;
 
     @NotNull
@@ -36,6 +36,6 @@ public class Transaction implements Serializable {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="payment_method_id",  nullable = false, unique = true)
+    @JoinColumn(name = "payment_method_id", nullable = false, unique = true)
     private PaymentMethod paymentMethod;
 }

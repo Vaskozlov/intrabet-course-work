@@ -1,24 +1,19 @@
 package org.vaskozlov.is.course.bean;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class Bet implements Serializable {
+public class Bet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @CreationTimestamp
-    private Instant placedAt;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_id", nullable = false)
@@ -27,4 +22,8 @@ public class Bet implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "outcome_id", nullable = false)
     private Outcome outcome;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

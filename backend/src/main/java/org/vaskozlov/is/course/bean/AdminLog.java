@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class AdminLog implements Serializable {
+public class AdminLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

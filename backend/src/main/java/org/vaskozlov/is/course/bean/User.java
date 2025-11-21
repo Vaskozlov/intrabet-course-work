@@ -1,7 +1,5 @@
 package org.vaskozlov.is.course.bean;
 
-import jakarta.json.bind.annotation.JsonbNillable;
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.vaskozlov.is.course.service.PasswordHasher;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "application_users")
 @NoArgsConstructor
-public class User implements Serializable {
+public class User {
     @Builder
     public User(String username, String email, String password) {
         this.username = username;
@@ -29,7 +26,6 @@ public class User implements Serializable {
     }
 
     @Id
-    @JsonbNillable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -43,7 +39,6 @@ public class User implements Serializable {
     private String email;
 
     @NotNull
-    @JsonbTransient
     private String passwordHash;
 
     @NotNull

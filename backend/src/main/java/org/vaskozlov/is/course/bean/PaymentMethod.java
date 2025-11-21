@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ import java.util.Map;
 @Data
 @Entity
 @NoArgsConstructor
-public class PaymentMethod implements Serializable {
+public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,4 +28,6 @@ public class PaymentMethod implements Serializable {
     @NotNull
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "paymentMethod", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transaction;
+
+    // TODO: add user as field
 }

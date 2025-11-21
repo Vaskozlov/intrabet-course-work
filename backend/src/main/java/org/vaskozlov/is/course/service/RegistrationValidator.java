@@ -1,50 +1,30 @@
 package org.vaskozlov.is.course.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.json.JsonObject;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
-import jakarta.json.bind.JsonbConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.vaskozlov.is.course.dto.UserRegistrationDTO;
 import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.UserRepository;
 
-@ApplicationScoped
+@Service
 public class RegistrationValidator {
-    private static final JsonbConfig JSONB_CONFIG = new JsonbConfig();
-    private static final Jsonb JSONB = JsonbBuilder.create(JSONB_CONFIG);
+    private final UserRepository userRepository;
 
-    @Inject
-    private UserRepository userRepository;
+    @Autowired
+    public RegistrationValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    public Result<Void, String> validate(JsonObject data) {
-        if (data == null) {
-            return Result.error("Failed to parse json");
-        }
-
-        String username = data.getString("username", null);
-
-        if (username == null) {
-            return Result.error("Username is missed or invalid");
-        }
-
-        String password = data.getString("password", null);
-        if (password == null) {
-            return Result.error("Password is missed or invalid");
-        }
-
-        String email = data.getString("email", null);
-        if (email == null) {
-            return Result.error("Email is missed or invalid");
-        }
-
-        if (userRepository.findByUsername(username).isPresent()) {
+    public Result<Void, String> validate(UserRegistrationDTO registrationDTO) {
+        if (userRepository.findByUsername(registrationDTO.getUsername()).isPresent()) {
             return Result.error("Username already exists");
         }
 
-        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByEmail(registrationDTO.getEmail()).isPresent()) {
             return Result.error("Email already exists");
         }
+
+        // TODO: validate password
 
         return Result.success(null);
     }

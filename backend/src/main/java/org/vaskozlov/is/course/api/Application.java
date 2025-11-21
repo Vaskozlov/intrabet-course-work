@@ -1,7 +1,22 @@
 package org.vaskozlov.is.course.api;
 
-import jakarta.ws.rs.ApplicationPath;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ApplicationPath("/api")
-public class Application extends jakarta.ws.rs.core.Application {
+@EnableJpaRepositories("org.vaskozlov.is.course.repository")
+@SpringBootApplication(scanBasePackages = {"org.vaskozlov.is.course"})
+@EntityScan(basePackages = "org.vaskozlov.is.course.bean")
+public class Application extends SpringBootServletInitializer {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
