@@ -24,6 +24,8 @@ public class Wallet {
     private BigDecimal balance = BigDecimal.ZERO;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(length = 3)
     private Currency currency = Currency.RUB;
 
     @NotNull

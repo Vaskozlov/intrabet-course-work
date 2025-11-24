@@ -46,4 +46,7 @@ public class Event {
 
     @ManyToMany(mappedBy = "events")
     private List<User> users = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "event", orphanRemoval = true)
+    private List<Outcome> outcomes = new ArrayList<>();
 }

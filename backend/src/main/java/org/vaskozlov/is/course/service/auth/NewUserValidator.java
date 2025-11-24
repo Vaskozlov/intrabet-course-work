@@ -1,4 +1,4 @@
-package org.vaskozlov.is.course.service;
+package org.vaskozlov.is.course.service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,11 +7,11 @@ import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.UserRepository;
 
 @Service
-public class RegistrationValidator {
+public class NewUserValidator {
     private final UserRepository userRepository;
 
     @Autowired
-    public RegistrationValidator(UserRepository userRepository) {
+    public NewUserValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
