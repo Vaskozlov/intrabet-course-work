@@ -20,6 +20,7 @@ val lombokVersion = "1.18.34"
 val jsonwebtokenVersion = "0.12.6"
 val bouncycastleVersion= "1.81"
 val mapstructVersion = "1.6.3"
+val caffeineVersion = "3.2.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -32,6 +33,7 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:${jsonwebtokenVersion}")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}")
     implementation("org.bouncycastle:bcprov-jdk18on:${bouncycastleVersion}")
+    implementation("com.github.ben-manes.caffeine:caffeine:${caffeineVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -39,6 +41,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
 }
 
 tasks.test {

@@ -1,9 +1,13 @@
 package org.vaskozlov.is.course.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.vaskozlov.is.course.bean.Category;
 import org.vaskozlov.is.course.bean.Event;
+import org.vaskozlov.is.course.bean.EventStatus;
 import org.vaskozlov.is.course.bean.Outcome;
 import org.vaskozlov.is.course.dto.CreatedEventDTO;
 import org.vaskozlov.is.course.dto.CreatedOutcomeDTO;
@@ -11,6 +15,7 @@ import org.vaskozlov.is.course.repository.CategoryRepository;
 import org.vaskozlov.is.course.repository.EventRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -31,6 +36,8 @@ public class EventsService {
         this.outcomeRepository = outcomeRepository;
     }
 
+    @Transactional
+    @CacheEvict(value = "eventsCache", allEntries = true)
     public Event createEvent(CreatedEventDTO createdEventDTO) {
         Event event = new Event();
 
@@ -63,6 +70,26 @@ public class EventsService {
         return event;
     }
 
+    @Cacheable(value = "eventsCache", key = "#category?.id + '_' + #givenTime")
+    public List<Event> findEvents(Category category, Instant givenTime) {
+        List<EventStatus> excludedStatuses = List.of(EventStatus.CANCELLED, EventStatus.COMPLETED);
+
+        if (category == null && givenTime == null) {
+            return eventRepository.findAll();
+        }
+
+        if (category == null) {
+            return eventRepository.findByStatusNotInAndEndsAtGreaterThan(excludedStatuses, givenTime);
+        }
+
+        if (givenTime == null) {
+            return eventRepository.findByCategory(category);
+        }
+
+        return eventRepository.findByCategoryAndStatusNotInAndEndsAtGreaterThan(category, excludedStatuses, givenTime);
+    }
+
+    @Cacheable(value = "eventsCache")
     public List<Event> findAll() {
         return eventRepository.findAll();
     }

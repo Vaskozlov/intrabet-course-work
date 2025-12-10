@@ -44,8 +44,8 @@ public class BetService {
         bet.setAmount(sum);
         bet.setUser(user);
         bet.setOutcome(outcome);
-
         bet = betRepository.save(bet);
+
         wallet.setBalance(wallet.getBalance().subtract(sum));
         walletRepository.save(wallet);
 
