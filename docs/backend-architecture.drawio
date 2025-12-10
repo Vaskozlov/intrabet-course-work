@@ -1,0 +1,271 @@
+<mxfile host="65bd71144e">
+    <diagram id="ol7vunjbBvkMxWoIPHLK" name="Контекст">
+        <mxGraphModel dx="1685" dy="647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object placeholders="1" c4Name="Студент" c4Type="Пользователь" c4Description="Просматривает события, делает ставки" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#cccccc&quot;&gt;[%c4Type%]&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="2">
+                    <mxCell style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="480" y="40" width="200" height="180" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object placeholders="1" c4Name="Администратор" c4Type="Пользователь" c4Description="Просматривает события, создает и изменяет события, производит модерацию&#xa;" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#cccccc&quot;&gt;[%c4Type%]&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="3">
+                    <mxCell style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="140" y="40" width="200" height="180" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object placeholders="1" c4Name="Система ставок" c4Type="Программная система" c4Description="Обрабатывает ставки, позволяет просматривать события" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;font color=&quot;#eeeeee&quot;&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#eeeeee&quot;&gt;[%c4Type%]&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" link="data:page/id,up5vh8qYVnHEgUrhAT8G" linkTarget="_blank" id="4">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="300" y="350" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="5" style="edgeStyle=none;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="580" y="300"/>
+                            <mxPoint x="480" y="300"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="Просматривает события,&lt;br&gt;делает ставик" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="5" vertex="1" connectable="0">
+                    <mxGeometry x="-0.4716" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" y="-21" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=none;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="3" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="300"/>
+                            <mxPoint x="360" y="300"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="Создает/редактирует события,&lt;br&gt;Модерирует систему" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="7" vertex="1" connectable="0">
+                    <mxGeometry x="-0.655" relative="1" as="geometry">
+                        <mxPoint y="-4" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="Система оплаты" c4Type="Программная система" c4Description="Обеспечивает работу интернет-платежей" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="9">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="750" y="220" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="10" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="4" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="870" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Запрос на обработку платежей" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="10" vertex="1" connectable="0">
+                    <mxGeometry x="-0.2883" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="Система аренды коллекторов" c4Type="Программная система" c4Description="Служба по возврату задолжностей от должников" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="12">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="300" y="600" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="13" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="4" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Выгружает информацию&lt;div&gt;о должниках&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="13" vertex="1" connectable="0">
+                    <mxGeometry x="-0.0033" y="1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="Система уведомлений" c4Type="Программная система" c4Description="Уведомляет пользователей об изменении статуса ставок" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="15">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="-170" y="220" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="16" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="4" target="15" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-50" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="up5vh8qYVnHEgUrhAT8G" name="Контейнер">
+        <mxGraphModel dx="1685" dy="647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object placeholders="1" c4Name="Студент" c4Type="Пользователь" c4Description="Просматривает события, делает ставки" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#cccccc&quot;&gt;[%c4Type%]&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="-YCDSeqMPlXm61tfDljf-1">
+                    <mxCell style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="480" y="20" width="200" height="180" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object placeholders="1" c4Name="Администратор" c4Type="Пользователь" c4Description="Просматривает события, создает и изменяет события, производит модерацию&#xa;" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#cccccc&quot;&gt;[%c4Type%]&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="-YCDSeqMPlXm61tfDljf-2">
+                    <mxCell style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="140" y="20" width="200" height="180" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object placeholders="1" c4Name="Веб-приложение" c4Type="Подсистема" c4Technology="JavaScript, Angular, т.д." c4Description="Предоставляет клиентам доступ к просмотру событий, пополнению баланса, позволяет делать ставки" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="-YCDSeqMPlXm61tfDljf-3">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="290" y="340" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="-YCDSeqMPlXm61tfDljf-4" style="edgeStyle=none;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="-YCDSeqMPlXm61tfDljf-1" target="-YCDSeqMPlXm61tfDljf-3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="580" y="300"/>
+                            <mxPoint x="530" y="300"/>
+                            <mxPoint x="470" y="300"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="-YCDSeqMPlXm61tfDljf-5" value="Просматривает события,&lt;div&gt;делает ставки&lt;/div&gt;&lt;div&gt;[JSON/HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-YCDSeqMPlXm61tfDljf-4" vertex="1" connectable="0">
+                    <mxGeometry x="-0.6587" relative="1" as="geometry">
+                        <mxPoint y="7" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="-YCDSeqMPlXm61tfDljf-6" style="edgeStyle=none;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="-YCDSeqMPlXm61tfDljf-2" target="-YCDSeqMPlXm61tfDljf-3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="300"/>
+                            <mxPoint x="300" y="300"/>
+                            <mxPoint x="350" y="300"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="-YCDSeqMPlXm61tfDljf-7" value="Создает/редактирует&lt;div&gt;события, проивзодит&lt;/div&gt;&lt;div&gt;модерацию&lt;/div&gt;&lt;div&gt;[JSON/HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-YCDSeqMPlXm61tfDljf-6" vertex="1" connectable="0">
+                    <mxGeometry x="-0.7349" y="-3" relative="1" as="geometry">
+                        <mxPoint x="3" y="10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-2" style="edgeStyle=none;html=1;" parent="1" source="-YCDSeqMPlXm61tfDljf-3" target="biDI4pqVR_Ekg3w5472B-5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410" y="540" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-3" value="Перенаправляет запросы&lt;div&gt;[HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-2" vertex="1" connectable="0">
+                    <mxGeometry x="0.0134" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-22" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-4" target="biDI4pqVR_Ekg3w5472B-15" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="740" y="1000"/>
+                            <mxPoint x="740" y="1130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-23" value="Чтение и запись&lt;br&gt;информации о&amp;nbsp;&lt;div&gt;пользователях в базу&lt;/div&gt;&lt;div&gt;&amp;nbsp;[JDBC]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-22" vertex="1" connectable="0">
+                    <mxGeometry x="-0.8231" y="1" relative="1" as="geometry">
+                        <mxPoint x="-1" y="42" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="Сервис авторизации" c4Type="Подсистема" c4Technology="Java, SpringBoot" c4Description="Производит авторизацию и аунтефикацию пользователей" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="biDI4pqVR_Ekg3w5472B-4">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="620" y="790" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-6" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-5" target="biDI4pqVR_Ekg3w5472B-4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="740" y="615"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-7" value="Запрашивает авторизацию&lt;div&gt;&amp;nbsp;[JSON/HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-6" vertex="1" connectable="0">
+                    <mxGeometry x="0.2091" relative="1" as="geometry">
+                        <mxPoint x="-120" y="-15" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="API-Gateway" c4Type="Container" c4Technology="Java, SpringBoot" c4Description="Единая точка входа&#xa;всех запросов" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="biDI4pqVR_Ekg3w5472B-5">
+                    <mxCell style="shape=hexagon;size=50;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;rounded=1;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="310" y="530" width="200" height="170" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object placeholders="1" c4Name="Список событий" c4Type="Подсистема" c4Technology="Java, SpringBoot" c4Description="Обеспечиыает доступ к списку событий" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="biDI4pqVR_Ekg3w5472B-8">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="290" y="790" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-9" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-5" target="biDI4pqVR_Ekg3w5472B-8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-10" value="Запрашивает список&lt;div&gt;событий&lt;/div&gt;&lt;div&gt;[JSON/HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-9" vertex="1" connectable="0">
+                    <mxGeometry x="-0.169" y="1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="Обработчик ставок" c4Type="Подсистема" c4Technology="Java, SpringBoot, PostgreSQL" c4Description="Обеспечиыает обработку ставок пользователей" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="biDI4pqVR_Ekg3w5472B-12">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="-40" y="790" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-13" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-5" target="biDI4pqVR_Ekg3w5472B-12" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="80" y="615"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-14" value="Передает ставки на события&lt;br&gt;[JSON/HTTPS]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-13" vertex="1" connectable="0">
+                    <mxGeometry x="-0.0083" y="1" relative="1" as="geometry">
+                        <mxPoint x="101" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <object placeholders="1" c4Name="База данных" c4Type="Подсистема" c4Technology="PostgreSQL" c4Description="Хранение информации о системе" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="biDI4pqVR_Ekg3w5472B-15">
+                    <mxCell style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" parent="1" vertex="1">
+                        <mxGeometry x="290" y="1070" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-18" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-12" target="biDI4pqVR_Ekg3w5472B-15" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="80" y="1000"/>
+                            <mxPoint x="80" y="1130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-19" value="Чтений и запись&lt;br&gt;информации о ставках в базу&lt;div&gt;[JDBC]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-18" vertex="1" connectable="0">
+                    <mxGeometry x="-0.6502" y="2" relative="1" as="geometry">
+                        <mxPoint x="-2" y="-5" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-20" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-8" target="biDI4pqVR_Ekg3w5472B-15" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="410" y="970"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-21" value="Чтений и запись&lt;br&gt;событий в базу&lt;div&gt;[JDBC]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="biDI4pqVR_Ekg3w5472B-20" vertex="1" connectable="0">
+                    <mxGeometry x="-0.4291" y="1" relative="1" as="geometry">
+                        <mxPoint x="-1" y="34" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="biDI4pqVR_Ekg3w5472B-24" value="&lt;font&gt;Стоило бы разделить хранение данных на несколько БД.&lt;br&gt;Но бюджет команды чашка кофе и два дня свободного времени&lt;/font&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;font&gt;БД со ставками и событиями&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font&gt;БД пользователей&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font&gt;Отдельно нужно сделать файловое хранилище (как минимум для изображений)&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="-230" y="1240" width="440" height="210" as="geometry"/>
+                </mxCell>
+                <object placeholders="1" c4Name="Система аренды коллекторов" c4Type="Программная система" c4Description="Служба по возврату задолжностей от должников" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="RAQCkuRSBUDBDlDWppQT-1">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="-480" y="790" width="240" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="RAQCkuRSBUDBDlDWppQT-2" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="biDI4pqVR_Ekg3w5472B-12" target="RAQCkuRSBUDBDlDWppQT-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="RAQCkuRSBUDBDlDWppQT-3" value="Передает информацию&lt;br&gt;о должниках&lt;div&gt;[JSON/HTTPS]&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="RAQCkuRSBUDBDlDWppQT-2" vertex="1" connectable="0">
+                    <mxGeometry x="0.1675" y="1" relative="1" as="geometry">
+                        <mxPoint x="27" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="RAQCkuRSBUDBDlDWppQT-4" value="&lt;font&gt;Для обработки платежей стоило бы прикрутить Apache Kafka.&amp;nbsp; Так как платежи не должны потеряться, нужно организовывать очереди оплаты, интеграцию со сторонними сервсивами оплаты.&lt;/font&gt;&lt;div&gt;&lt;font&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;RabitMQ больше подходит именно как очередь, в ней (насолько я знаю) из коробки нельзя сохранять информацию о прошедших событиях и повтороять запросы в случае необходимости.&lt;/font&gt;&lt;/div&gt;" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="750" y="1240" width="350" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="RAQCkuRSBUDBDlDWppQT-7" value="Сервис оплаты?" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;" parent="1" vertex="1">
+                    <mxGeometry x="960" y="805" width="199" height="90" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
