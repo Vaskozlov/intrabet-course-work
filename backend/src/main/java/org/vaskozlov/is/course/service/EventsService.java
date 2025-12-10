@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.vaskozlov.is.course.bean.Category;
-import org.vaskozlov.is.course.bean.Event;
-import org.vaskozlov.is.course.bean.EventStatus;
-import org.vaskozlov.is.course.bean.Outcome;
+import org.vaskozlov.is.course.bean.*;
 import org.vaskozlov.is.course.dto.CreatedEventDTO;
 import org.vaskozlov.is.course.dto.CreatedOutcomeDTO;
+import org.vaskozlov.is.course.dto.EventFinishDTO;
+import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.CategoryRepository;
 import org.vaskozlov.is.course.repository.EventRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
@@ -38,7 +37,7 @@ public class EventsService {
 
     @Transactional
     @CacheEvict(value = "eventsCache", allEntries = true)
-    public Event createEvent(CreatedEventDTO createdEventDTO) {
+    public Event createEvent(CreatedEventDTO createdEventDTO, User author) {
         Event event = new Event();
 
         event.setTitle(createdEventDTO.getTitle());
@@ -46,6 +45,8 @@ public class EventsService {
 
         event.setStartsAt(createdEventDTO.getStartsAt().toInstant());
         event.setEndsAt(createdEventDTO.getEndsAt().toInstant());
+
+        event.setAuthor(author);
 
         String categoryName = createdEventDTO.getCategory();
 
@@ -92,5 +93,34 @@ public class EventsService {
     @Cacheable(value = "eventsCache")
     public List<Event> findAll() {
         return eventRepository.findAll();
+    }
+
+    @Transactional
+    @CacheEvict(value = "eventsCache", allEntries = true)
+    public Result<Void, String> finishEvent(EventFinishDTO eventFinishDTO, User user) {
+        var event = eventRepository
+                .findById(eventFinishDTO.getEventId())
+                .orElseThrow();
+
+        var authorId = event.getAuthor().getId();
+
+        if (!user.getId().equals(authorId) || !user.getRole().equals(Role.ADMIN)) {
+            return Result.error("You are not allowed to finish event");
+        }
+
+        event.setStatus(eventFinishDTO.getStatus());
+        event.setClosedAt(Instant.now());
+
+        if (event.getStatus().equals(EventStatus.COMPLETED)) {
+            assert eventFinishDTO.getOutcomeId() != null;
+
+            var outcome = outcomeRepository
+                    .findById(eventFinishDTO.getOutcomeId())
+                    .orElseThrow();
+
+            outcome.setIsWinner(true);
+        }
+
+        return Result.success(null);
     }
 }

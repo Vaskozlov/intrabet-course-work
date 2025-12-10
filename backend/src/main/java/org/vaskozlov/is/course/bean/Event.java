@@ -37,6 +37,8 @@ public class Event {
 
     private Instant endsAt;
 
+    private Instant closedAt;
+
     EventStatus status = EventStatus.PLANNED;
 
     @NotNull
@@ -49,4 +51,8 @@ public class Event {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "event", orphanRemoval = true)
     private List<Outcome> outcomes = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User author;
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.vaskozlov.is.course.bean.Category;
 import org.vaskozlov.is.course.bean.User;
 import org.vaskozlov.is.course.dto.CreatedEventDTO;
+import org.vaskozlov.is.course.dto.EventFinishDTO;
 import org.vaskozlov.is.course.service.CategoryService;
 import org.vaskozlov.is.course.service.EventsService;
 
@@ -35,11 +36,38 @@ public class EventsController {
             @AuthenticationPrincipal User user
     ) {
         try {
-            var event = eventsService.createEvent(eventDTO);
+            var event = eventsService.createEvent(eventDTO, user);
 
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(event);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace(System.err);
+
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+    }
+
+    @PostMapping("/finish")
+    public ResponseEntity<?> finishEvent(
+            @Valid @RequestBody EventFinishDTO eventFinishDTO,
+            @AuthenticationPrincipal User user
+    ) {
+        try {
+            var finishResult = eventsService.finishEvent(eventFinishDTO, user);
+
+            if (finishResult.isError()) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(finishResult.getError());
+            }
+
+            return ResponseEntity
+                    .ok()
+                    .build();
         } catch (Exception e) {
             System.err.println(e.getMessage());
             e.printStackTrace(System.err);
