@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Outcome {
@@ -25,4 +27,7 @@ public class Outcome {
     private String description;
 
     private Boolean isWinner = null;
+
+    @OneToMany(mappedBy = "outcome", fetch = FetchType.LAZY)
+    private List<Bet> bets;
 }

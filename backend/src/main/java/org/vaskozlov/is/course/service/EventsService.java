@@ -14,6 +14,8 @@ import org.vaskozlov.is.course.repository.CategoryRepository;
 import org.vaskozlov.is.course.repository.EventRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -108,9 +110,6 @@ public class EventsService {
             return Result.error("You are not allowed to finish event");
         }
 
-        event.setStatus(eventFinishDTO.getStatus());
-        event.setClosedAt(Instant.now());
-
         if (event.getStatus().equals(EventStatus.COMPLETED)) {
             assert eventFinishDTO.getOutcomeId() != null;
 
@@ -119,8 +118,64 @@ public class EventsService {
                     .orElseThrow();
 
             outcome.setIsWinner(true);
+            distributeMoney(event);
+        } else if (event.getStatus().equals(EventStatus.CANCELLED)) {
+            returnUsersMoney(event);
         }
 
+        event.setStatus(eventFinishDTO.getStatus());
+        event.setClosedAt(Instant.now());
+
         return Result.success(null);
+    }
+
+    private void returnUsersMoney(Event event) {
+        event
+                .getOutcomes()
+                .stream()
+                .flatMap(outcome -> outcome.getBets().stream())
+                .forEach(bet ->
+                        bet
+                                .getUser()
+                                .getWallet()
+                                .addBalance(bet.getAmount())
+                );
+
+    }
+
+    private void distributeMoney(Event event) {
+        BigDecimal sumFailed = event.getOutcomes()
+                .stream()
+                .filter(outcome -> !outcome.getIsWinner())
+                .flatMap(outcome -> outcome.getBets().stream())
+                .map(Bet::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        List<Bet> winningBets = event.getOutcomes()
+                .stream()
+                .filter(Outcome::getIsWinner)
+                .flatMap(outcome -> outcome.getBets().stream())
+                .toList();
+
+        BigDecimal sumSucceed = winningBets.stream()
+                .map(Bet::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        if (sumSucceed.compareTo(BigDecimal.ZERO) == 0) {
+            return;
+        }
+
+        BigDecimal sumToDistribute = sumFailed.multiply(BigDecimal.valueOf(0.8));
+
+        winningBets.forEach(bet -> {
+            BigDecimal wonMoney = bet.getAmount()
+                    .divide(sumSucceed, RoundingMode.FLOOR)
+                    .multiply(sumToDistribute)
+                    .max(BigDecimal.ZERO);
+
+            bet.getUser()
+                    .getWallet()
+                    .addBalance(wonMoney);
+        });
     }
 }

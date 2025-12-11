@@ -32,4 +32,8 @@ public class Wallet {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
+
+    public void addBalance(BigDecimal balanceChange) {
+        balance = balance.add(balanceChange);
+    }
 }
