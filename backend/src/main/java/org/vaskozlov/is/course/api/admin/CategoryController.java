@@ -23,8 +23,6 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    /// TODO: add access control
-
     @PostMapping("/create")
     public ResponseEntity<?> create(
             @Valid @RequestBody CategoryDTO categoryDTO,
