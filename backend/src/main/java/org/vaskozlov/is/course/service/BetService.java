@@ -4,14 +4,17 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaskozlov.is.course.bean.Bet;
+import org.vaskozlov.is.course.bean.EventStatus;
 import org.vaskozlov.is.course.bean.User;
 import org.vaskozlov.is.course.dto.BetDTO;
+import org.vaskozlov.is.course.dto.PlacedBetDto;
 import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.BetRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
 import org.vaskozlov.is.course.repository.WalletRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class BetService {
@@ -50,5 +53,20 @@ public class BetService {
         walletRepository.save(wallet);
 
         return Result.success(bet);
+    }
+
+    public List<PlacedBetDto> getBets(User user, boolean showClosed) {
+        List<Bet> result;
+
+        if (showClosed) {
+            result = betRepository.findByUser(user);
+        } else {
+            result = betRepository.findByUserAndOutcomeEventStatusIn(user, List.of(EventStatus.PLANNED, EventStatus.ONGOING));
+        }
+
+        return result
+                .stream()
+                .map(PlacedBetDto::fromBet)
+                .toList();
     }
 }

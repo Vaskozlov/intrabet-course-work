@@ -166,6 +166,7 @@ public class EventsService {
         }
 
         BigDecimal sumToDistribute = sumFailed.multiply(BigDecimal.valueOf(0.8));
+        final BigDecimal[] distributed = {BigDecimal.ZERO};
 
         winningBets.forEach(bet -> {
             BigDecimal wonMoney = bet.getAmount()
@@ -176,6 +177,8 @@ public class EventsService {
             bet.getUser()
                     .getWallet()
                     .addBalance(wonMoney);
+
+            distributed[0] = distributed[0].add(wonMoney);
         });
     }
 }
