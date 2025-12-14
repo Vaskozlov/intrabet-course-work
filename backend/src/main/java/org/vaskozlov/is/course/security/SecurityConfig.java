@@ -53,6 +53,9 @@ public class SecurityConfig {
                                 .requestMatchers("/events/list")
                                 .permitAll()
 
+                                .requestMatchers("/events/stream")
+                                .permitAll()
+
                                 .requestMatchers("/admin/**")
                                 .hasRole("ADMIN")
 

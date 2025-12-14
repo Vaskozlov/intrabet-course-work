@@ -4,30 +4,36 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.vaskozlov.is.course.bean.Category;
 import org.vaskozlov.is.course.bean.User;
 import org.vaskozlov.is.course.dto.CreatedEventDTO;
 import org.vaskozlov.is.course.dto.EventFinishDTO;
 import org.vaskozlov.is.course.service.CategoryService;
+import org.vaskozlov.is.course.service.EventNotificationService;
 import org.vaskozlov.is.course.service.EventsService;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/events")
 public class EventsController {
     private final EventsService eventsService;
     private final CategoryService categoryService;
+    private final EventNotificationService eventNotificationService;
 
     @Autowired
-    public EventsController(EventsService eventsService, CategoryService categoryService) {
+    public EventsController(EventsService eventsService, CategoryService categoryService, EventNotificationService eventNotificationService) {
         this.eventsService = eventsService;
         this.categoryService = categoryService;
+        this.eventNotificationService = eventNotificationService;
     }
 
     @PostMapping("/create")
@@ -117,5 +123,12 @@ public class EventsController {
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .build();
         }
+    }
+
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter streamEvents() {
+        SseEmitter emitter = new SseEmitter(TimeUnit.MINUTES.toMillis(60));
+        eventNotificationService.addEmitter(emitter);
+        return emitter;
     }
 }

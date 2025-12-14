@@ -25,16 +25,18 @@ public class EventsService {
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
     private final OutcomeRepository outcomeRepository;
+    private final EventNotificationService eventNotificationService;
 
     @Autowired
     public EventsService(
             CategoryRepository categoryRepository,
             EventRepository eventRepository,
-            OutcomeRepository outcomeRepository
-    ) {
+            OutcomeRepository outcomeRepository,
+            EventNotificationService eventNotificationService) {
         this.categoryRepository = categoryRepository;
         this.eventRepository = eventRepository;
         this.outcomeRepository = outcomeRepository;
+        this.eventNotificationService = eventNotificationService;
     }
 
     @Transactional
@@ -70,6 +72,7 @@ public class EventsService {
             outcomeRepository.save(outcome);
         }
 
+        eventNotificationService.notify(event);
         return event;
     }
 
@@ -126,6 +129,7 @@ public class EventsService {
         event.setStatus(eventFinishDTO.getStatus());
         event.setClosedAt(Instant.now());
 
+        eventNotificationService.notify(event);
         return Result.success(null);
     }
 

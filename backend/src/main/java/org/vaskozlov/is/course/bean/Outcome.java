@@ -1,6 +1,7 @@
 package org.vaskozlov.is.course.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,7 @@ public class Outcome {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
@@ -28,6 +29,7 @@ public class Outcome {
 
     private Boolean isWinner = null;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "outcome", fetch = FetchType.LAZY)
     private List<Bet> bets;
 }

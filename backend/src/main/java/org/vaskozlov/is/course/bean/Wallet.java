@@ -1,5 +1,6 @@
 package org.vaskozlov.is.course.bean;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Wallet {
     private Currency currency = Currency.RUB;
 
     @NotNull
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;

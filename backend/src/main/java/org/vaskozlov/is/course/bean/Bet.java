@@ -1,5 +1,6 @@
 package org.vaskozlov.is.course.bean;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ public class Bet {
     @CreationTimestamp
     private Instant createdAt;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "outcome_id", nullable = false)
     private Outcome outcome;
