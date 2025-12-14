@@ -47,13 +47,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/auth/**")
-                                .permitAll()
-
-                                .requestMatchers("/events/list")
-                                .permitAll()
-
-                                .requestMatchers("/events/stream")
+                                .requestMatchers(
+                                        "/auth/**",
+                                        "/druid/**",
+                                        "/events/list",
+                                        "/events/stream"
+                                )
                                 .permitAll()
 
                                 .requestMatchers("/admin/**")

@@ -24,6 +24,7 @@ val caffeineVersion = "3.2.3"
 val jakartaCacheApiVersion = "1.1.1"
 val jCacheVersion = "6.5.2.Final"
 val ehcacheVersion = "3.11.1"
+val druidVersion = "1.2.27"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -39,6 +40,7 @@ dependencies {
     implementation("com.github.ben-manes.caffeine:caffeine:${caffeineVersion}")
     implementation("com.github.ben-manes.caffeine:jcache:${caffeineVersion}")
     implementation("org.hibernate.orm:hibernate-jcache:${jCacheVersion}")
+    implementation("com.alibaba:druid-spring-boot-3-starter:${druidVersion}")
     implementation("org.ehcache:ehcache:${ehcacheVersion}") {
         artifact {
             classifier = "jakarta"
