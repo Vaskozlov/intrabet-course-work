@@ -12,6 +12,12 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(
+        name = "outcome",
+        indexes = {
+                @Index(name = "idx_outcome_event_id", columnList = "event_id"),
+        }
+)
 public class Outcome {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

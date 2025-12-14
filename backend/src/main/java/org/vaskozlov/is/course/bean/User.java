@@ -2,7 +2,6 @@ package org.vaskozlov.is.course.bean;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -22,8 +21,14 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "application_users")
 @NoArgsConstructor
+@Table(
+        name = "application_users",
+        indexes = {
+                @Index(name = "idx_users_email", columnList = "email", unique = true),
+                @Index(name = "idx_users_username", columnList = "username", unique = true)
+        }
+)
 public class User implements UserDetails {
     @Builder
     public User(String username, String email, String passwordHash) {
