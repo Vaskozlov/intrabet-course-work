@@ -7,6 +7,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS trig_create_wallet ON application_users;
+
 CREATE TRIGGER trig_create_wallet
     AFTER INSERT
     ON application_users
