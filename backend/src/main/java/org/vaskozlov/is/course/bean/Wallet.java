@@ -13,6 +13,13 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(
+        name = "wallet",
+        indexes = {
+                @Index(name = "idx_wallet_user_id", columnList = "user_id")
+        }
+)
+
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
