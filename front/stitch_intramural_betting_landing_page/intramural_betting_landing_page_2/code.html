@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intrabet: Авторизация</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FF1F1F", 
+                        "primary-hover": "#D61616",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#09090b", // Slightly darker/richer black
+                        "surface-dark": "#18181b", // Zinc 900
+                        "surface-light": "#FFFFFF",
+                        "accent-gray": "#27272a", // Zinc 800
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(255, 31, 31, 0.4)',
+                        'neon-sm': '0 0 10px rgba(255, 31, 31, 0.3)',
+                        'glow-inset': 'inset 0 0 20px rgba(255, 31, 31, 0.1)',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF1F1F;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 31, 31, 0.5);
+        }
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px #18181b inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-gray-100 font-body antialiased min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-primary/10 rounded-full blur-[100px]"></div>
+</div>
+<main class="w-full max-w-md px-6">
+<div class="text-center mb-8">
+<div class="inline-flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2.5 rounded-xl border border-primary/20 shadow-neon-sm">
+<span class="material-symbols-outlined text-primary text-3xl">confirmation_number</span>
+</div>
+<span class="font-display font-bold text-3xl tracking-tight text-white uppercase">Intra<span class="text-primary">bet</span></span>
+</div>
+<h1 class="text-2xl font-bold text-white mb-2">С возвращением!</h1>
+<p class="text-gray-400 text-sm">Войдите в свой аккаунт, чтобы продолжить игру</p>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-8 shadow-2xl relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<form action="#" class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-300 block" for="email">Email или Логин</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 text-[20px]">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 bg-background-dark border border-accent-gray rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" id="email" name="email" placeholder="user@example.com" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-sm font-medium text-gray-300 block" for="password">Пароль</label>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-3 bg-background-dark border border-accent-gray rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" id="password" name="password" placeholder="••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+<button class="text-gray-500 hover:text-white transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="flex justify-end pt-1">
+<a class="text-xs font-medium text-primary hover:text-primary-hover hover:underline transition-colors" href="#">Забыли пароль?</a>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-display font-bold py-3.5 px-4 rounded-xl shadow-neon transition-all transform hover:scale-[1.02] active:scale-[0.98] group/btn" type="button">
+<span>ВОЙТИ</span>
+<span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-accent-gray text-center">
+<p class="text-gray-400 text-sm">
+                    Нет аккаунта? 
+                    <a class="font-bold text-white hover:text-primary transition-colors ml-1" href="#">Зарегистрироваться</a>
+</p>
+</div>
+</div>
+<div class="mt-8 text-center text-xs text-gray-600">
+            © 2024 Intrabet. All rights reserved.
+        </div>
+</main>
+
+</body></html>

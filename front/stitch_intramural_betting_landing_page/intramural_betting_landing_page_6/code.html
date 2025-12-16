@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intrabet: Профиль Пользователя</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FF1F1F", 
+                        "primary-hover": "#D61616",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#09090b",
+                        "surface-dark": "#18181b",
+                        "surface-light": "#FFFFFF",
+                        "accent-gray": "#27272a",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(255, 31, 31, 0.4)',
+                        'neon-sm': '0 0 10px rgba(255, 31, 31, 0.3)',
+                        'glow-inset': 'inset 0 0 20px rgba(255, 31, 31, 0.1)',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF1F1F;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 31, 31, 0.5);
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-body antialiased min-h-screen flex flex-col">
+<nav class="bg-surface-dark border-b border-accent-gray py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">confirmation_number</span>
+</div>
+<span class="font-display font-bold text-xl tracking-tight text-white uppercase">Intra<span class="text-primary">bet</span></span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-widest text-gray-500">Ваш Баланс</span>
+<span class="font-display font-bold text-xl text-white">1 240,50 ₽</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-400 text-sm">person</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6 flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-primary/20 to-transparent"></div>
+<div class="relative z-10 w-24 h-24 rounded-full bg-surface-dark border-4 border-accent-gray flex items-center justify-center mb-4 shadow-xl">
+<span class="material-symbols-outlined text-gray-400 text-5xl">person</span>
+</div>
+<h2 class="font-display font-bold text-2xl text-white">User_Winner99</h2>
+<p class="text-gray-500 text-sm mb-6">ID: 8839201 • Регистрация: 12.01.2023</p>
+<div class="w-full grid grid-cols-2 gap-4 mb-6">
+<div class="bg-black/30 p-3 rounded-xl border border-accent-gray">
+<div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider mb-1">Ставок</div>
+<div class="text-xl font-bold text-white">142</div>
+</div>
+<div class="bg-black/30 p-3 rounded-xl border border-accent-gray">
+<div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider mb-1">Выигрыши</div>
+<div class="text-xl font-bold text-green-500">68%</div>
+</div>
+</div>
+<button class="w-full bg-transparent border border-accent-gray hover:border-primary/50 text-gray-400 hover:text-white py-2 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">logout</span>
+                        Выйти
+                    </button>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-display font-bold text-lg text-white uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                            Кошелек
+                        </h3>
+<span class="text-xs bg-green-500/10 text-green-500 px-2 py-1 rounded border border-green-500/20">Верифицирован</span>
+</div>
+<div class="text-center mb-8">
+<span class="text-sm text-gray-500 uppercase tracking-widest block mb-1">Доступный Баланс</span>
+<span class="font-display font-bold text-4xl text-white text-glow">1 240,50 ₽</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-primary hover:bg-primary-hover text-white py-3 px-4 rounded-xl font-bold shadow-neon-sm transition-all transform hover:scale-[1.02] flex flex-col items-center justify-center gap-1">
+<span class="material-symbols-outlined">add_card</span>
+<span class="text-xs uppercase">Пополнить</span>
+</button>
+<button class="bg-surface-light text-black hover:bg-gray-200 py-3 px-4 rounded-xl font-bold shadow-lg transition-all transform hover:scale-[1.02] flex flex-col items-center justify-center gap-1">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-xs uppercase">Вывести</span>
+</button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-dark border border-accent-gray p-4 rounded-xl flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="bg-blue-500/10 p-3 rounded-lg text-blue-500 group-hover:text-blue-400">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div>
+<div class="text-xs text-gray-500 uppercase font-bold">История Ставок</div>
+<div class="text-white font-bold">Посмотреть все</div>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray p-4 rounded-xl flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="bg-yellow-500/10 p-3 rounded-lg text-yellow-500 group-hover:text-yellow-400">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<div>
+<div class="text-xs text-gray-500 uppercase font-bold">Бонусы</div>
+<div class="text-white font-bold">Активные: 2</div>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray p-4 rounded-xl flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="bg-purple-500/10 p-3 rounded-lg text-purple-500 group-hover:text-purple-400">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<div class="text-xs text-gray-500 uppercase font-bold">Безопасность</div>
+<div class="text-white font-bold">Настроить 2FA</div>
+</div>
+</div>
+</div>
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-display font-bold text-xl text-white uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+                            Последние Транзакции
+                        </h2>
+<a class="text-sm text-gray-500 hover:text-white transition-colors" href="#">Все транзакции</a>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-2xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-gray-400">
+<thead class="bg-black/20 text-xs uppercase font-bold text-gray-500 border-b border-accent-gray">
+<tr>
+<th class="px-6 py-4">Тип</th>
+<th class="px-6 py-4">Дата</th>
+<th class="px-6 py-4">Метод</th>
+<th class="px-6 py-4 text-right">Статус</th>
+<th class="px-6 py-4 text-right">Сумма</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-accent-gray">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">south_west</span>
+                                            Пополнение
+                                        </td>
+<td class="px-6 py-4">15 Окт, 14:30</td>
+<td class="px-6 py-4">Банковская карта **** 4242</td>
+<td class="px-6 py-4 text-right"><span class="bg-green-500/10 text-green-500 px-2 py-1 rounded text-xs font-bold border border-green-500/20">УСПЕХ</span></td>
+<td class="px-6 py-4 text-right font-bold text-white">+ 5 000 ₽</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500 text-lg">north_east</span>
+                                            Вывод
+                                        </td>
+<td class="px-6 py-4">12 Окт, 09:15</td>
+<td class="px-6 py-4">Crypto Wallet (USDT)</td>
+<td class="px-6 py-4 text-right"><span class="bg-green-500/10 text-green-500 px-2 py-1 rounded text-xs font-bold border border-green-500/20">УСПЕХ</span></td>
+<td class="px-6 py-4 text-right font-bold text-white">- 2 500 ₽</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-lg">casino</span>
+                                            Ставка #8841
+                                        </td>
+<td class="px-6 py-4">10 Окт, 18:45</td>
+<td class="px-6 py-4">Спортивное событие</td>
+<td class="px-6 py-4 text-right"><span class="bg-yellow-500/10 text-yellow-500 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">В ИГРЕ</span></td>
+<td class="px-6 py-4 text-right font-bold text-gray-300">- 500 ₽</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">emoji_events</span>
+                                            Выигрыш
+                                        </td>
+<td class="px-6 py-4">08 Окт, 21:00</td>
+<td class="px-6 py-4">Экспресс (3)</td>
+<td class="px-6 py-4 text-right"><span class="bg-green-500/10 text-green-500 px-2 py-1 rounded text-xs font-bold border border-green-500/20">УСПЕХ</span></td>
+<td class="px-6 py-4 text-right font-bold text-green-500">+ 12 340 ₽</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-black/20 border-t border-accent-gray text-center">
+<button class="text-sm text-gray-400 hover:text-primary transition-colors font-medium">Показать больше</button>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-4 mb-4">
+<h2 class="font-display font-bold text-xl text-white uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">tune</span>
+                            Личные данные
+                        </h2>
+<div class="h-px bg-accent-gray flex-grow"></div>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<div>
+<label class="block text-xs uppercase text-gray-500 font-bold mb-2">E-mail адрес</label>
+<div class="flex items-center justify-between bg-black/30 rounded-lg border border-accent-gray p-3 text-gray-300">
+<span>user.winner99@example.com</span>
+<span class="material-symbols-outlined text-green-500 text-sm" title="Подтвержден">check_circle</span>
+</div>
+</div>
+<div>
+<label class="block text-xs uppercase text-gray-500 font-bold mb-2">Номер телефона</label>
+<div class="flex items-center justify-between bg-black/30 rounded-lg border border-accent-gray p-3 text-gray-300">
+<span>+7 (999) ***-**-99</span>
+<button class="text-xs text-primary hover:text-white transition-colors">Изменить</button>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs uppercase text-gray-500 font-bold mb-2">Пароль</label>
+<div class="flex items-center justify-between bg-black/30 rounded-lg border border-accent-gray p-3 text-gray-300">
+<span>••••••••••••</span>
+<button class="text-xs text-primary hover:text-white transition-colors">Сбросить</button>
+</div>
+</div>
+<div>
+<label class="block text-xs uppercase text-gray-500 font-bold mb-2">Язык интерфейса</label>
+<select class="w-full bg-black/30 border border-accent-gray rounded-lg p-3 text-gray-300 focus:border-primary focus:ring-0 outline-none">
+<option>Русский</option>
+<option>English</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

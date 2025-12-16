@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intrabet: Bet Slip &amp; Live Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FF1F1F", 
+                        "primary-hover": "#D61616",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#09090b", // Slightly darker/richer black
+                        "surface-dark": "#18181b", // Zinc 900
+                        "surface-light": "#FFFFFF",
+                        "accent-gray": "#27272a", // Zinc 800
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(255, 31, 31, 0.4)',
+                        'neon-sm': '0 0 10px rgba(255, 31, 31, 0.3)',
+                        'glow-inset': 'inset 0 0 20px rgba(255, 31, 31, 0.1)',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF1F1F;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 31, 31, 0.5);
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-body antialiased min-h-screen flex flex-col">
+<nav class="bg-surface-dark border-b border-accent-gray py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">confirmation_number</span>
+</div>
+<span class="font-display font-bold text-xl tracking-tight text-white uppercase">Intra<span class="text-primary">bet</span></span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-widest text-gray-500">Ваш Баланс</span>
+<span class="font-display font-bold text-xl text-white">1 240,50 ₽</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-400 text-sm">person</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+<section class="mb-10">
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-display font-bold text-xl text-white uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                Актуальные ставки
+            </h2>
+<div class="h-px bg-accent-gray flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="bg-surface-dark border border-accent-gray rounded-xl p-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-50">
+<span class="material-symbols-outlined text-gray-600 text-4xl">sports_soccer</span>
+</div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<div>
+<div class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-1">Ординар • Футбол</div>
+<div class="font-bold text-white">Победа Goal Diggers</div>
+</div>
+<span class="bg-yellow-500/10 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded border border-yellow-500/20">В ИГРЕ</span>
+</div>
+<div class="flex justify-between items-center text-sm border-t border-gray-800 pt-3 mt-1">
+<div class="text-gray-400">Ставка: <span class="text-white font-mono">500 ₽</span></div>
+<div class="text-gray-400">Коэф: <span class="text-primary font-mono font-bold">2.10</span></div>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-xl p-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-50">
+<span class="material-symbols-outlined text-gray-600 text-4xl">sports_esports</span>
+</div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<div>
+<div class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-1">Экспресс (2) • Киберспорт</div>
+<div class="font-bold text-white">Alex K. vs Dmitry V.</div>
+</div>
+<span class="bg-yellow-500/10 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded border border-yellow-500/20">В ИГРЕ</span>
+</div>
+<div class="flex justify-between items-center text-sm border-t border-gray-800 pt-3 mt-1">
+<div class="text-gray-400">Ставка: <span class="text-white font-mono">1 200 ₽</span></div>
+<div class="text-gray-400">Коэф: <span class="text-primary font-mono font-bold">3.45</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-10">
+<div class="bg-surface-dark border border-accent-gray rounded-2xl shadow-2xl overflow-hidden relative">
+<div class="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+<div class="p-6 md:p-8">
+<div class="flex items-center justify-between mb-6">
+<h1 class="font-display font-bold text-2xl md:text-3xl text-white flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                        АКТИВНЫЙ КУПОН
+                    </h1>
+<button class="text-sm text-gray-500 hover:text-white transition-colors underline decoration-dotted">Очистить все</button>
+</div>
+<div class="hidden md:grid grid-cols-12 gap-4 text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">
+<div class="col-span-5">Событие / Выбор</div>
+<div class="col-span-2 text-center">Коэфф.</div>
+<div class="col-span-3">Ставка (₽)</div>
+<div class="col-span-2 text-right">Выигрыш</div>
+</div>
+<div class="space-y-4">
+<div class="bg-black/40 border border-accent-gray rounded-xl p-4 md:grid md:grid-cols-12 md:gap-4 md:items-center relative group hover:border-primary/50 transition-colors">
+<button class="absolute -right-2 -top-2 md:relative md:right-auto md:top-auto md:order-last md:col-span-1 bg-surface-dark md:bg-transparent border md:border-0 border-accent-gray rounded-full p-1 text-gray-500 hover:text-primary transition-colors z-10 shadow-md md:shadow-none">
+<span class="material-symbols-outlined text-sm md:text-lg">close</span>
+</button>
+<div class="col-span-12 md:col-span-5 mb-3 md:mb-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+<span class="text-[10px] uppercase text-red-500 font-bold tracking-widest">Live • Баскетбол</span>
+</div>
+<div class="font-bold text-white text-lg">Восточные Спартанцы</div>
+<div class="text-xs text-gray-400">Победа в матче (вкл. ОТ)</div>
+</div>
+<div class="col-span-6 md:col-span-2 flex md:justify-center items-center mb-3 md:mb-0">
+<span class="bg-primary/10 text-primary font-mono font-bold px-3 py-1 rounded text-lg">+120</span>
+</div>
+<div class="col-span-6 md:col-span-3 mb-3 md:mb-0">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">₽</span>
+<input class="w-full bg-surface-dark border border-gray-700 focus:border-primary rounded-lg py-2 pl-7 pr-3 text-white font-bold outline-none transition-all shadow-inner" type="number" value="500"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-1 text-right flex justify-between md:block items-center border-t md:border-0 border-gray-800 pt-2 md:pt-0">
+<span class="md:hidden text-xs text-gray-500 uppercase">Выигрыш</span>
+<span class="text-green-500 font-bold text-lg md:text-base">1 100 ₽</span>
+</div>
+</div>
+<div class="bg-black/40 border border-accent-gray rounded-xl p-4 md:grid md:grid-cols-12 md:gap-4 md:items-center relative group hover:border-primary/50 transition-colors">
+<button class="absolute -right-2 -top-2 md:relative md:right-auto md:top-auto md:order-last md:col-span-1 bg-surface-dark md:bg-transparent border md:border-0 border-accent-gray rounded-full p-1 text-gray-500 hover:text-primary transition-colors z-10 shadow-md md:shadow-none">
+<span class="material-symbols-outlined text-sm md:text-lg">close</span>
+</button>
+<div class="col-span-12 md:col-span-5 mb-3 md:mb-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] uppercase text-gray-500 font-bold tracking-widest">Флаг-футбол • Полуфинал</span>
+</div>
+<div class="font-bold text-white text-lg">Theta Chi (-5.5)</div>
+<div class="text-xs text-gray-400">Фора</div>
+</div>
+<div class="col-span-6 md:col-span-2 flex md:justify-center items-center mb-3 md:mb-0">
+<span class="bg-primary/10 text-primary font-mono font-bold px-3 py-1 rounded text-lg">-110</span>
+</div>
+<div class="col-span-6 md:col-span-3 mb-3 md:mb-0">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">₽</span>
+<input class="w-full bg-surface-dark border border-gray-700 focus:border-primary rounded-lg py-2 pl-7 pr-3 text-white font-bold outline-none transition-all shadow-inner" type="number" value="1000"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-1 text-right flex justify-between md:block items-center border-t md:border-0 border-gray-800 pt-2 md:pt-0">
+<span class="md:hidden text-xs text-gray-500 uppercase">Выигрыш</span>
+<span class="text-green-500 font-bold text-lg md:text-base">1 909 ₽</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-accent-gray grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-sm text-gray-400">
+<span>Общая сумма ставки:</span>
+<span class="text-white font-medium">1 500 ₽</span>
+</div>
+<div class="flex items-center justify-between text-lg">
+<span class="text-gray-300 font-bold">Возможный выигрыш:</span>
+<span class="text-green-500 font-display font-bold text-2xl text-glow">3 009 ₽</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-hover text-white font-display font-bold text-xl py-4 rounded-xl shadow-neon transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3">
+<span>РАЗМЕСТИТЬ СТАВКУ</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-display font-bold text-xl text-white uppercase tracking-tight">Добавить в купон</h2>
+<div class="h-px bg-accent-gray flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+</span>
+</div>
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_basketball</span>
+<span class="text-xs font-bold text-gray-400 uppercase">Баскетбол • Финал</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Спартанцы</div>
+<div class="text-xs font-mono text-primary">84</div>
+<div class="text-xs font-mono text-gray-600 px-2">-</div>
+<div class="text-xs font-mono text-primary">82</div>
+<div class="text-sm font-bold text-white text-right">Воины</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            СПАРТ <span class="block text-[10px] opacity-70">+120</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            ВОИНЫ <span class="block text-[10px] opacity-70">-140</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_football</span>
+<span class="text-xs font-bold text-gray-400 uppercase">Флаг-футбол • Полуфинал</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Theta Chi</div>
+<div class="text-sm font-bold text-white text-right">Sig Ep</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            T.C. <span class="ml-1 text-primary group-hover:text-white">-210</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            Ничья <span class="ml-1 text-primary group-hover:text-white">+450</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            S.E. <span class="ml-1 text-primary group-hover:text-white">+180</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_soccer</span>
+<span class="text-xs font-bold text-gray-400 uppercase">Футбол • Лига B</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Goal Diggers</div>
+<div class="text-sm font-bold text-white text-right">Kickin' It</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            1 <span class="ml-1 text-primary group-hover:text-white">+110</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            X <span class="ml-1 text-primary group-hover:text-white">+210</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            2 <span class="ml-1 text-primary group-hover:text-white">+140</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_volleyball</span>
+<span class="text-xs font-bold text-gray-400 uppercase">Волейбол • Завтра 20:00</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Spike Tysons</div>
+<div class="text-sm font-bold text-white text-right">Net Results</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            SPIKE <span class="ml-1 text-primary group-hover:text-white">-150</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            NET <span class="ml-1 text-primary group-hover:text-white">+130</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group opacity-75 hover:opacity-100">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_esports</span>
+<span class="text-xs font-bold text-gray-400 uppercase">FIFA 24 • Турнир Общежития</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Alex K.</div>
+<div class="text-sm font-bold text-white text-right">Dmitry V.</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            ALEX <span class="ml-1 text-primary group-hover:text-white">-110</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            DMIT <span class="ml-1 text-primary group-hover:text-white">-110</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray hover:border-primary/40 rounded-lg p-4 transition-all group opacity-75 hover:opacity-100">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-gray-500">sports_tennis</span>
+<span class="text-xs font-bold text-gray-400 uppercase">Пинг-Понг • Одиночный</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="text-sm font-bold text-white">Chen W.</div>
+<div class="text-sm font-bold text-white text-right">Mike R.</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            CHEN <span class="ml-1 text-primary group-hover:text-white">-500</span>
+</button>
+<button class="bg-accent-gray hover:bg-primary hover:text-white text-gray-300 py-2 rounded text-xs font-bold transition-colors">
+                            MIKE <span class="ml-1 text-primary group-hover:text-white">+350</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+</body></html>

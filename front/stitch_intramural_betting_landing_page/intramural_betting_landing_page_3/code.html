@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intrabet: Вывод средств</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FF1F1F", 
+                        "primary-hover": "#D61616",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#09090b",
+                        "surface-dark": "#18181b",
+                        "surface-light": "#FFFFFF",
+                        "accent-gray": "#27272a",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(255, 31, 31, 0.4)',
+                        'neon-sm': '0 0 10px rgba(255, 31, 31, 0.3)',
+                        'glow-inset': 'inset 0 0 20px rgba(255, 31, 31, 0.1)',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF1F1F;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 31, 31, 0.5);
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-body antialiased min-h-screen flex flex-col">
+<nav class="bg-surface-dark border-b border-accent-gray py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">confirmation_number</span>
+</div>
+<span class="font-display font-bold text-xl tracking-tight text-white uppercase">Intra<span class="text-primary">bet</span></span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-widest text-gray-500">Ваш Баланс</span>
+<span class="font-display font-bold text-xl text-white">1 240,50 ₽</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-400 text-sm">person</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6 flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-primary/20 to-transparent"></div>
+<div class="relative z-10 w-24 h-24 rounded-full bg-surface-dark border-4 border-accent-gray flex items-center justify-center mb-4 shadow-xl">
+<span class="material-symbols-outlined text-gray-400 text-5xl">person</span>
+</div>
+<h2 class="font-display font-bold text-2xl text-white">User_Winner99</h2>
+<p class="text-gray-500 text-sm mb-6">ID: 8839201</p>
+<div class="w-full flex justify-between px-4 py-3 bg-black/30 rounded-xl border border-accent-gray mb-2">
+<span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Статус</span>
+<span class="text-xs text-green-500 font-bold uppercase border border-green-500/20 bg-green-500/10 px-2 rounded">Верифицирован</span>
+</div>
+</div>
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-display font-bold text-lg text-white uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                            Кошелек
+                        </h3>
+</div>
+<div class="text-center mb-8">
+<span class="text-sm text-gray-500 uppercase tracking-widest block mb-1">Доступный Баланс</span>
+<span class="font-display font-bold text-4xl text-white text-glow">1 240,50 ₽</span>
+</div>
+<div class="bg-yellow-500/5 border border-yellow-500/10 p-3 rounded-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-yellow-500 text-sm mt-0.5">info</span>
+<p class="text-xs text-yellow-500/80 leading-relaxed">
+                            Средства на бонусном счете (350 ₽) станут доступны для вывода после отыгрыша.
+                        </p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8">
+<div class="bg-surface-dark border border-accent-gray rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+<div class="flex items-center gap-4 mb-8 border-b border-accent-gray pb-6">
+<div class="bg-primary/10 p-3 rounded-xl shadow-neon-sm">
+<span class="material-symbols-outlined text-primary text-3xl">payments</span>
+</div>
+<div>
+<h2 class="font-display font-bold text-2xl text-white uppercase tracking-tight">Вывод средств</h2>
+<p class="text-sm text-gray-400">Выберите платежную систему и укажите сумму</p>
+</div>
+</div>
+<div class="mb-10">
+<label class="block text-xs uppercase text-gray-500 font-bold mb-4 tracking-wider">Метод вывода</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<label class="cursor-pointer relative group">
+<input checked="" class="peer sr-only" name="method" type="radio"/>
+<div class="bg-black/40 border-2 border-accent-gray peer-checked:border-primary rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition-all peer-checked:shadow-neon-sm hover:border-gray-600 h-full">
+<div class="w-12 h-12 rounded-full bg-surface-dark flex items-center justify-center mb-1 group-hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-3xl text-white">credit_card</span>
+</div>
+<div class="text-center">
+<div class="text-sm font-bold text-white mb-1">Банковская карта</div>
+<div class="text-[10px] text-gray-400 uppercase tracking-wide">Visa, MC, MIR</div>
+</div>
+<div class="absolute top-3 right-3 text-primary opacity-0 peer-checked:opacity-100 transition-opacity transform scale-50 peer-checked:scale-100">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+</div>
+</label>
+<label class="cursor-pointer relative group">
+<input class="peer sr-only" name="method" type="radio"/>
+<div class="bg-surface-dark border-2 border-accent-gray peer-checked:border-primary rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition-all peer-checked:shadow-neon-sm peer-checked:bg-black/40 hover:border-gray-600 h-full">
+<div class="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center mb-1 group-hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-3xl text-gray-400 peer-checked:text-white group-hover:text-white transition-colors">currency_bitcoin</span>
+</div>
+<div class="text-center">
+<div class="text-sm font-bold text-gray-400 peer-checked:text-white group-hover:text-white transition-colors mb-1">Криптовалюта</div>
+<div class="text-[10px] text-gray-500 uppercase tracking-wide">USDT, BTC, ETH</div>
+</div>
+<div class="absolute top-3 right-3 text-primary opacity-0 peer-checked:opacity-100 transition-opacity transform scale-50 peer-checked:scale-100">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+</div>
+</label>
+<label class="cursor-pointer relative group">
+<input class="peer sr-only" name="method" type="radio"/>
+<div class="bg-surface-dark border-2 border-accent-gray peer-checked:border-primary rounded-xl p-5 flex flex-col items-center justify-center gap-3 transition-all peer-checked:shadow-neon-sm peer-checked:bg-black/40 hover:border-gray-600 h-full">
+<div class="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center mb-1 group-hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-3xl text-gray-400 peer-checked:text-white group-hover:text-white transition-colors">account_balance_wallet</span>
+</div>
+<div class="text-center">
+<div class="text-sm font-bold text-gray-400 peer-checked:text-white group-hover:text-white transition-colors mb-1">Эл. кошелек</div>
+<div class="text-[10px] text-gray-500 uppercase tracking-wide">Piastrix, FK</div>
+</div>
+<div class="absolute top-3 right-3 text-primary opacity-0 peer-checked:opacity-100 transition-opacity transform scale-50 peer-checked:scale-100">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<label class="block text-xs uppercase text-gray-500 font-bold tracking-wider">Сумма вывода</label>
+<span class="text-xs text-primary font-medium bg-primary/10 px-2 py-0.5 rounded border border-primary/20">Мин: 500 ₽</span>
+</div>
+<div class="relative group">
+<input class="w-full bg-black/30 border border-accent-gray group-hover:border-gray-600 rounded-xl py-4 pl-5 pr-12 text-white font-display font-bold text-xl focus:border-primary focus:ring-0 outline-none transition-all placeholder-gray-600 shadow-inner" placeholder="0" type="number"/>
+<span class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg group-focus-within:text-white transition-colors">₽</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-light/5 hover:bg-surface-light/10 active:bg-surface-light/20 text-xs font-bold text-gray-400 hover:text-white py-2.5 rounded-lg transition-colors border border-transparent hover:border-gray-600">1000</button>
+<button class="flex-1 bg-surface-light/5 hover:bg-surface-light/10 active:bg-surface-light/20 text-xs font-bold text-gray-400 hover:text-white py-2.5 rounded-lg transition-colors border border-transparent hover:border-gray-600">5000</button>
+<button class="flex-1 bg-surface-light/5 hover:bg-surface-light/10 active:bg-surface-light/20 text-xs font-bold text-gray-400 hover:text-white py-2.5 rounded-lg transition-colors border border-transparent hover:border-gray-600">MAX</button>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block text-xs uppercase text-gray-500 font-bold tracking-wider">Реквизиты карты</label>
+<div class="relative group">
+<input class="w-full bg-black/30 border border-accent-gray group-hover:border-gray-600 rounded-xl py-4 pl-12 pr-4 text-white font-body text-lg focus:border-primary focus:ring-0 outline-none transition-all placeholder-gray-600 shadow-inner" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">credit_card</span>
+</span>
+</div>
+<div class="bg-surface-light/5 rounded-lg p-3 border border-white/5">
+<p class="text-[11px] text-gray-400 leading-tight">
+                                    Внимание: Вывод средств возможен только на карту, принадлежащую владельцу аккаунта <b>User_Winner99</b>.
+                                </p>
+</div>
+</div>
+</div>
+<div class="bg-black/40 rounded-xl p-5 border border-accent-gray mb-6 backdrop-blur-sm">
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm text-gray-400 font-medium">Комиссия платежной системы</span>
+<span class="text-sm text-white font-bold">0%</span>
+</div>
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm text-gray-400 font-medium">Время обработки транзакции</span>
+<span class="text-sm text-green-500 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base">schedule</span>
+                                    ~ 15 мин
+                                </span>
+</div>
+<div class="h-px bg-accent-gray my-4 dashed"></div>
+<div class="flex justify-between items-center">
+<span class="text-base text-gray-300 font-medium">Итого к списанию</span>
+<span class="text-2xl text-primary font-display font-bold text-glow">0.00 ₽</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-display font-bold text-lg shadow-neon uppercase tracking-wider transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 group">
+<span class="material-symbols-outlined group-hover:animate-pulse">lock</span>
+                        Подтвердить вывод
+                    </button>
+<div class="mt-8 flex items-start gap-3 p-4 bg-blue-500/5 rounded-xl border border-blue-500/10">
+<span class="material-symbols-outlined text-blue-500 shrink-0 mt-0.5">verified_user</span>
+<div class="space-y-1">
+<p class="text-xs text-blue-400 font-bold uppercase">Безопасная транзакция</p>
+<p class="text-xs text-blue-400/70 leading-relaxed">
+                            Все транзакции защищены протоколом сквозного шифрования SSL. Мы не храним полный номер вашей карты. В случае возникновения вопросов обратитесь в <a class="underline hover:text-white" href="#">поддержку</a>.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>
