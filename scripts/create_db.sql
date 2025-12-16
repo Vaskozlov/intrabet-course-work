@@ -90,7 +90,7 @@ CREATE TABLE payment_methods (
 -- Триггер для автоматического создания кошелька при регистрации пользователя
 CREATE OR REPLACE FUNCTION create_wallet() RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO wallets (user_id) VALUES (NEW.id);
+    INSERT INTO wallets (user_id, balance) VALUES (NEW.id, 1000.00);
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -98,3 +98,58 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trig_create_wallet
 AFTER INSERT ON users
 FOR EACH ROW EXECUTE FUNCTION create_wallet();
+
+-- Триггер для обновления баланса при размещении ставки
+CREATE OR REPLACE FUNCTION update_wallet_on_bet() RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE wallets
+    SET balance = balance - NEW.amount
+    WHERE user_id = NEW.user_id;
+
+    -- Создаем транзакцию
+    INSERT INTO transactions (wallet_id, amount, type)
+    SELECT id, -NEW.amount, 'bet'
+    FROM wallets
+    WHERE user_id = NEW.user_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trig_update_wallet_on_bet
+AFTER INSERT ON bets
+FOR EACH ROW EXECUTE FUNCTION update_wallet_on_bet();
+
+-- Триггер для начисления выигрыша
+CREATE OR REPLACE FUNCTION process_bet_winnings() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.is_winner = TRUE AND OLD.is_winner = FALSE THEN
+        -- Начисляем выигрыш всем ставкам на этот outcome
+        UPDATE wallets w
+        SET balance = balance + (b.amount * 2)
+        FROM bets b
+        WHERE b.outcome_id = NEW.id
+          AND b.user_id = w.user_id
+          AND b.status = 'active';
+
+        -- Создаем транзакции выигрышей
+        INSERT INTO transactions (wallet_id, amount, type)
+        SELECT w.id, (b.amount * 2), 'win'
+        FROM bets b
+        JOIN wallets w ON w.user_id = b.user_id
+        WHERE b.outcome_id = NEW.id
+          AND b.status = 'active';
+
+        -- Обновляем статус ставок
+        UPDATE bets
+        SET status = 'settled'
+        WHERE outcome_id = NEW.id
+          AND status = 'active';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trig_process_bet_winnings
+AFTER UPDATE ON outcomes
+FOR EACH ROW EXECUTE FUNCTION process_bet_winnings();

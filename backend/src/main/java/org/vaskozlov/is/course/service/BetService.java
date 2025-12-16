@@ -35,7 +35,7 @@ public class BetService {
     @Transactional
     public Result<Bet, String> place(BetDTO betDTO, User user) {
         var wallet = user.getWallet();
-        var sum = BigDecimal.valueOf(betDTO.getSum(), 2);
+        var sum = BigDecimal.valueOf(betDTO.getSum());
 
         if (wallet.getBalance().compareTo(sum) < 0) {
             return Result.error("Not enough balance");

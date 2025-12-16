@@ -85,7 +85,7 @@ public class EventsService {
         List<EventStatus> excludedStatuses = List.of(EventStatus.CANCELLED, EventStatus.COMPLETED);
 
         if (category == null && givenTime == null) {
-            return eventRepository.findAll();
+            return eventRepository.findAllWithOutcomesAndCategory();
         }
 
         if (category == null) {
@@ -113,11 +113,11 @@ public class EventsService {
 
         var authorId = event.getAuthor().getId();
 
-        if (!user.getId().equals(authorId) || !user.getRole().equals(Role.ADMIN)) {
+        if (!user.getId().equals(authorId) && !user.getRole().equals(Role.ADMIN)) {
             return Result.error("You are not allowed to finish event");
         }
 
-        if (event.getStatus().equals(EventStatus.COMPLETED)) {
+        if (eventFinishDTO.getStatus().equals(EventStatus.COMPLETED)) {
             assert eventFinishDTO.getOutcomeId() != null;
 
             var outcome = outcomeRepository
@@ -126,7 +126,7 @@ public class EventsService {
 
             outcome.setIsWinner(true);
             distributeMoney(event);
-        } else if (event.getStatus().equals(EventStatus.CANCELLED)) {
+        } else if (eventFinishDTO.getStatus().equals(EventStatus.CANCELLED)) {
             returnUsersMoney(event);
         }
 
@@ -157,14 +157,14 @@ public class EventsService {
     private void distributeMoney(Event event) {
         BigDecimal sumFailed = event.getOutcomes()
                 .stream()
-                .filter(outcome -> !outcome.getIsWinner())
+                .filter(outcome -> !Boolean.TRUE.equals(outcome.getIsWinner()))
                 .flatMap(outcome -> outcome.getBets().stream())
                 .map(Bet::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         List<Bet> winningBets = event.getOutcomes()
                 .stream()
-                .filter(Outcome::getIsWinner)
+                .filter(outcome -> Boolean.TRUE.equals(outcome.getIsWinner()))
                 .flatMap(outcome -> outcome.getBets().stream())
                 .toList();
 

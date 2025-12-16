@@ -26,4 +26,9 @@ public class UserController {
         userNotificationService.addEmitter(user, emitter);
         return emitter;
     }
+
+    @GetMapping("/me")
+    public User getCurrentUser(@AuthenticationPrincipal User user) {
+        return user;
+    }
 }
