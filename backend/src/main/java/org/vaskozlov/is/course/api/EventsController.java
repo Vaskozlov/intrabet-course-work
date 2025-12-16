@@ -14,7 +14,7 @@ import org.vaskozlov.is.course.bean.User;
 import org.vaskozlov.is.course.dto.CreatedEventDTO;
 import org.vaskozlov.is.course.dto.EventFinishDTO;
 import org.vaskozlov.is.course.service.CategoryService;
-import org.vaskozlov.is.course.service.EventNotificationService;
+import org.vaskozlov.is.course.service.notifications.EventNotificationService;
 import org.vaskozlov.is.course.service.EventsService;
 
 import java.time.Instant;

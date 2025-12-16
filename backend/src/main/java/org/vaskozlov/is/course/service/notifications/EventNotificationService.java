@@ -1,4 +1,4 @@
-package org.vaskozlov.is.course.service;
+package org.vaskozlov.is.course.service.notifications;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;

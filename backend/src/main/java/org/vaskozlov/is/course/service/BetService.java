@@ -12,6 +12,7 @@ import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.BetRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
 import org.vaskozlov.is.course.repository.WalletRepository;
+import org.vaskozlov.is.course.service.notifications.UserNotificationService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,12 +22,14 @@ public class BetService {
     private final OutcomeRepository outcomeRepository;
     private final BetRepository betRepository;
     private final WalletRepository walletRepository;
+    private final UserNotificationService userNotificationService;
 
     @Autowired
-    public BetService(OutcomeRepository outcomeRepository, BetRepository betRepository, WalletRepository walletRepository) {
+    public BetService(OutcomeRepository outcomeRepository, BetRepository betRepository, WalletRepository walletRepository, UserNotificationService userNotificationService) {
         this.outcomeRepository = outcomeRepository;
         this.betRepository = betRepository;
         this.walletRepository = walletRepository;
+        this.userNotificationService = userNotificationService;
     }
 
     @Transactional
@@ -47,10 +50,12 @@ public class BetService {
         bet.setAmount(sum);
         bet.setUser(user);
         bet.setOutcome(outcome);
-        bet = betRepository.save(bet);
 
+        bet = betRepository.save(bet);
         wallet.setBalance(wallet.getBalance().subtract(sum));
+
         walletRepository.save(wallet);
+        userNotificationService.notifyAccountChange(user);
 
         return Result.success(bet);
     }

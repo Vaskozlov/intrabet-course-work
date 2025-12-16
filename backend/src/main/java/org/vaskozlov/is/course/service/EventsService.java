@@ -13,6 +13,8 @@ import org.vaskozlov.is.course.lib.Result;
 import org.vaskozlov.is.course.repository.CategoryRepository;
 import org.vaskozlov.is.course.repository.EventRepository;
 import org.vaskozlov.is.course.repository.OutcomeRepository;
+import org.vaskozlov.is.course.service.notifications.EventNotificationService;
+import org.vaskozlov.is.course.service.notifications.UserNotificationService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,17 +28,19 @@ public class EventsService {
     private final EventRepository eventRepository;
     private final OutcomeRepository outcomeRepository;
     private final EventNotificationService eventNotificationService;
+    private final UserNotificationService userNotificationService;
 
     @Autowired
     public EventsService(
             CategoryRepository categoryRepository,
             EventRepository eventRepository,
             OutcomeRepository outcomeRepository,
-            EventNotificationService eventNotificationService) {
+            EventNotificationService eventNotificationService, UserNotificationService userNotificationService) {
         this.categoryRepository = categoryRepository;
         this.eventRepository = eventRepository;
         this.outcomeRepository = outcomeRepository;
         this.eventNotificationService = eventNotificationService;
+        this.userNotificationService = userNotificationService;
     }
 
     @Transactional
@@ -138,11 +142,14 @@ public class EventsService {
                 .getOutcomes()
                 .stream()
                 .flatMap(outcome -> outcome.getBets().stream())
-                .forEach(bet ->
-                        bet
-                                .getUser()
-                                .getWallet()
-                                .addBalance(bet.getAmount())
+                .forEach(bet -> {
+                            var user = bet.getUser();
+
+                            user.getWallet()
+                                    .addBalance(bet.getAmount());
+
+                            userNotificationService.notifyAccountChange(user);
+                        }
                 );
 
     }
@@ -178,11 +185,13 @@ public class EventsService {
                     .multiply(sumToDistribute)
                     .max(BigDecimal.ZERO);
 
-            bet.getUser()
-                    .getWallet()
+            User user = bet.getUser();
+
+            user.getWallet()
                     .addBalance(wonMoney);
 
             distributed[0] = distributed[0].add(wonMoney);
+            userNotificationService.notifyAccountChange(user);
         });
     }
 }
