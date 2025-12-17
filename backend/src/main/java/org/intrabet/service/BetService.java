@@ -66,7 +66,8 @@ public class BetService {
         if (showClosed) {
             result = betRepository.findByUser(user);
         } else {
-            result = betRepository.findByUserAndOutcomeEventStatusIn(user, List.of(EventStatus.PLANNED, EventStatus.ONGOING));
+            result = betRepository.findByUserAndOutcomeEventStatusIn(user,
+                    List.of(EventStatus.PLANNED, EventStatus.ONGOING));
         }
 
         return result
