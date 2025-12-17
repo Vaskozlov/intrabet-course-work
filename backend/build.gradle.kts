@@ -4,7 +4,7 @@ plugins {
     java
 }
 
-group = "org.vaskozlov.is.course"
+group = "org.intrabet"
 version = "1.0"
 
 java {
