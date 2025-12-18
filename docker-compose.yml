@@ -72,9 +72,89 @@ services:
       timeout: 10s
       retries: 3
 
+  # Events Exporter - мониторинг событий
+  events-exporter:
+    build:
+      context: ./monitoring/events-exporter
+      dockerfile: Dockerfile
+    container_name: is-course-work-events-exporter
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: university_bets
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      EXPORTER_PORT: 9101
+      SCRAPE_INTERVAL: 15
+    ports:
+      - "9101:9101"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: is-course-work-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - app-network
+    depends_on:
+      - events-exporter
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: is-course-work-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - app-network
+    depends_on:
+      - prometheus
+
+  # PostgreSQL Exporter
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: is-course-work-postgres-exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME: "postgresql://postgres:postgres@db:5432/university_bets?sslmode=disable"
+    ports:
+      - "9187:9187"
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+
 networks:
   app-network:
     driver: bridge
 
 volumes:
   postgres_data:
+  prometheus_data:
+  grafana_data:
