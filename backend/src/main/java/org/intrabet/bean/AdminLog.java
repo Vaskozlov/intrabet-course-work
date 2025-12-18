@@ -18,6 +18,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public class AdminLog {
     @Id
+    @Builder.Default
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
@@ -25,6 +26,7 @@ public class AdminLog {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Builder.Default
     @CreationTimestamp
     private Instant transactionDate = null;
 

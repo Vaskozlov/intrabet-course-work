@@ -7,11 +7,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.math.BigDecimal;
 
 @Data
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "walletCache")
 @NoArgsConstructor
 @Table(
         name = "wallet",
@@ -19,7 +22,6 @@ import java.math.BigDecimal;
                 @Index(name = "idx_wallet_user_id", columnList = "user_id")
         }
 )
-
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
