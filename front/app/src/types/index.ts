@@ -19,7 +19,7 @@ export interface Category {
 export interface Outcome {
   id: number;
   description: string;
-  isWinner: boolean;
+  isWinner: boolean | null;
 }
 
 export interface Event {
@@ -40,6 +40,7 @@ export interface BetRequest {
   sum: number;
 }
 
+// Новая структура Bet согласно PlacedBetDto с бекенда
 export interface Bet {
   id: number;
   userId: number;
@@ -47,8 +48,26 @@ export interface Bet {
   amount: number;
   placementTime: string;
   status: 'ACTIVE' | 'SETTLED';
-  outcome: Outcome;
-  event: Event;
+  outcome: {
+    id: number;
+    description: string;
+    isWinner: boolean | null;
+  };
+  event: {
+    id: number;
+    title: string;
+    description?: string;
+    createdAt: string;
+    updatedAt: string;
+    startsAt?: string | null;
+    endsAt?: string | null;
+    status: 'PLANNED' | 'ONGOING' | 'COMPLETED' | 'CANCELLED';
+    category: {
+      id: number;
+      name: string;
+      description?: string | null;
+    };
+  };
 }
 
 export interface UserRegistration {

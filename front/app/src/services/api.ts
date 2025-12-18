@@ -73,8 +73,10 @@ export const betsApi = {
     await api.post('/bets/place', data);
   },
 
-  getUserBets: async (): Promise<any[]> => {
-    const response = await api.get('/bets/list');
+  getUserBets: async (showClosed: boolean = true): Promise<any[]> => {
+    const response = await api.get('/bets/list', {
+      params: { showClosed }
+    });
     return response.data;
   },
 };
