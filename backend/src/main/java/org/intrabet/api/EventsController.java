@@ -1,6 +1,13 @@
 package org.intrabet.api;
 
 import jakarta.validation.Valid;
+import org.intrabet.bean.Category;
+import org.intrabet.bean.User;
+import org.intrabet.dto.CreatedEventDTO;
+import org.intrabet.dto.EventFinishDTO;
+import org.intrabet.service.CategoryService;
+import org.intrabet.service.EventsService;
+import org.intrabet.service.notifications.EventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -9,13 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.intrabet.bean.Category;
-import org.intrabet.bean.User;
-import org.intrabet.dto.CreatedEventDTO;
-import org.intrabet.dto.EventFinishDTO;
-import org.intrabet.service.CategoryService;
-import org.intrabet.service.notifications.EventNotificationService;
-import org.intrabet.service.EventsService;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -27,13 +27,16 @@ import java.util.concurrent.TimeUnit;
 public class EventsController {
     private final EventsService eventsService;
     private final CategoryService categoryService;
-    private final EventNotificationService eventNotificationService;
+    private final EventPublisher eventPublisher;
 
     @Autowired
-    public EventsController(EventsService eventsService, CategoryService categoryService, EventNotificationService eventNotificationService) {
+    public EventsController(EventsService eventsService,
+                            CategoryService categoryService,
+                            EventPublisher eventPublisher
+    ) {
         this.eventsService = eventsService;
         this.categoryService = categoryService;
-        this.eventNotificationService = eventNotificationService;
+        this.eventPublisher = eventPublisher;
     }
 
     @PostMapping("/create")
@@ -128,7 +131,7 @@ public class EventsController {
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamEvents() {
         SseEmitter emitter = new SseEmitter(TimeUnit.MINUTES.toMillis(60));
-        eventNotificationService.addEmitter(emitter);
+        eventPublisher.addEmitter(emitter);
         return emitter;
     }
 }

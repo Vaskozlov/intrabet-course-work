@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class EventNotificationService {
+public class EventPublisher {
     private final List<SseEmitter> emitters = Collections.synchronizedList(new ArrayList<>());
 
     public void addEmitter(SseEmitter emitter) {

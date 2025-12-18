@@ -12,7 +12,7 @@ import org.intrabet.lib.Result;
 import org.intrabet.repository.BetRepository;
 import org.intrabet.repository.OutcomeRepository;
 import org.intrabet.repository.WalletRepository;
-import org.intrabet.service.notifications.UserNotificationService;
+import org.intrabet.service.notifications.UserPublisher;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,14 +22,14 @@ public class BetService {
     private final OutcomeRepository outcomeRepository;
     private final BetRepository betRepository;
     private final WalletRepository walletRepository;
-    private final UserNotificationService userNotificationService;
+    private final UserPublisher userPublisher;
 
     @Autowired
-    public BetService(OutcomeRepository outcomeRepository, BetRepository betRepository, WalletRepository walletRepository, UserNotificationService userNotificationService) {
+    public BetService(OutcomeRepository outcomeRepository, BetRepository betRepository, WalletRepository walletRepository, UserPublisher userPublisher) {
         this.outcomeRepository = outcomeRepository;
         this.betRepository = betRepository;
         this.walletRepository = walletRepository;
-        this.userNotificationService = userNotificationService;
+        this.userPublisher = userPublisher;
     }
 
     @Transactional
@@ -55,7 +55,7 @@ public class BetService {
         wallet.setBalance(wallet.getBalance().subtract(sum));
 
         walletRepository.save(wallet);
-        userNotificationService.notifyAccountChange(user);
+        userPublisher.notifyAccountChange(user);
 
         return Result.success(bet);
     }

@@ -10,8 +10,8 @@ import org.intrabet.repository.AdminLogRepository;
 import org.intrabet.repository.CategoryRepository;
 import org.intrabet.repository.EventRepository;
 import org.intrabet.repository.OutcomeRepository;
-import org.intrabet.service.notifications.EventNotificationService;
-import org.intrabet.service.notifications.UserNotificationService;
+import org.intrabet.service.notifications.EventPublisher;
+import org.intrabet.service.notifications.UserPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,8 +28,8 @@ public class EventsService {
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
     private final OutcomeRepository outcomeRepository;
-    private final EventNotificationService eventNotificationService;
-    private final UserNotificationService userNotificationService;
+    private final EventPublisher eventPublisher;
+    private final UserPublisher userPublisher;
     private final AdminLogRepository adminLogRepository;
 
     @Autowired
@@ -37,14 +37,14 @@ public class EventsService {
             CategoryRepository categoryRepository,
             EventRepository eventRepository,
             OutcomeRepository outcomeRepository,
-            EventNotificationService eventNotificationService,
-            UserNotificationService userNotificationService,
+            EventPublisher eventPublisher,
+            UserPublisher userPublisher,
             AdminLogRepository adminLogRepository) {
         this.categoryRepository = categoryRepository;
         this.eventRepository = eventRepository;
         this.outcomeRepository = outcomeRepository;
-        this.eventNotificationService = eventNotificationService;
-        this.userNotificationService = userNotificationService;
+        this.eventPublisher = eventPublisher;
+        this.userPublisher = userPublisher;
         this.adminLogRepository = adminLogRepository;
     }
 
@@ -87,7 +87,7 @@ public class EventsService {
         event.getCategory().getName();
         event.getOutcomes().size();
 
-        eventNotificationService.notify(event);
+        eventPublisher.notify(event);
 
         adminLogRepository.save(
                 AdminLog.builder()
@@ -157,7 +157,7 @@ public class EventsService {
         event.getCategory().getName();
         event.getOutcomes().size();
 
-        eventNotificationService.notify(event);
+        eventPublisher.notify(event);
         return Result.success(null);
     }
 
@@ -170,7 +170,7 @@ public class EventsService {
 
                     user.getWallet().addBalance(bet.getAmount());
 
-                    userNotificationService.notifyAccountChange(user);
+                    userPublisher.notifyAccountChange(user);
                 });
     }
 
@@ -212,7 +212,7 @@ public class EventsService {
             user.getWallet().addBalance(wonMoney);
 
             distributed[0] = distributed[0].add(wonMoney);
-            userNotificationService.notifyAccountChange(user);
+            userPublisher.notifyAccountChange(user);
         });
     }
 }

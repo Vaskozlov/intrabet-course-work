@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class UserNotificationService {
+public class UserPublisher {
     private final Map<Long, List<SseEmitter>> userEmitters = new ConcurrentHashMap<>();
 
     public void addEmitter(User user, SseEmitter emitter) {
