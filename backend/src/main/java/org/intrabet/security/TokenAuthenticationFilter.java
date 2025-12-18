@@ -4,6 +4,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.intrabet.service.auth.JwtTokenService;
+import org.intrabet.service.auth.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.intrabet.service.auth.JwtTokenService;
-import org.intrabet.service.auth.TokenService;
 
 import java.io.IOException;
 
@@ -55,30 +55,42 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             String authHeader,
             HttpServletRequest request,
             HttpServletResponse response
-    ) {
+    ) throws IOException {
         final String token = authHeader
                 .substring(tokenService.getTokenType().length() + 1);
 
         final String username = tokenService.getUsername(token);
+
+        if (username == null) {
+            return;
+        }
+
         final SecurityContext securityContext = SecurityContextHolder.getContext();
 
-        if (username != null && securityContext.getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        if (securityContext.getAuthentication() != null) {
+            return;
+        }
 
-            if (tokenService.isTokenValid(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
-                );
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource()
-                                .buildDetails(request)
-                );
+        if (tokenService.isTokenValid(token, userDetails)) {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities()
+            );
 
-                securityContext.setAuthentication(authToken);
-            }
+            authToken.setDetails(
+                    new WebAuthenticationDetailsSource()
+                            .buildDetails(request)
+            );
+
+            securityContext.setAuthentication(authToken);
+        } else if (tokenService.isTokenExpired(token)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"Token expired\"}");
+            response.getWriter().flush();
         }
     }
 }

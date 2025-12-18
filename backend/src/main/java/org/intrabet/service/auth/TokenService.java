@@ -27,4 +27,6 @@ public interface TokenService {
      * @return true in case token is not expired and username matches
      */
     boolean isTokenValid(String token, UserDetails userDetails);
+
+    boolean isTokenExpired(String token);
 }

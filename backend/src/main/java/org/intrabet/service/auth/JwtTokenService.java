@@ -1,6 +1,7 @@
 package org.intrabet.service.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -54,24 +55,19 @@ public class JwtTokenService implements TokenService {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    @Override
+    public boolean isTokenExpired(String token) {
+        try {
+            return extractExpiration(token).before(new Date());
+        } catch (ExpiredJwtException e) {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
-    }
-
-    private String createToken(String subject, Map<String, Object> claims) {
-        long EXPIRATION_TIME = TimeUnit.DAYS.toMillis(3);
-
-        return Jwts.builder()
-                .subject(subject)
-                .claims(claims)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(getSignInKey())
-                .compact();
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
