@@ -253,8 +253,9 @@ const Home: React.FC = () => {
   const getStatusBadge = (status: 'ACTIVE' | 'SETTLED') => {
     if (status === 'ACTIVE') {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400 border border-green-500/30">
-          <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400 border border-green-500/30 animate-pulse">
+          <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-ping absolute"></span>
+          <span className="w-1.5 h-1.5 bg-green-400 rounded-full relative"></span>
           Активна
         </span>
       );
@@ -331,8 +332,9 @@ const Home: React.FC = () => {
                             className="w-full bg-surface-dark border border-gray-700 focus:border-primary rounded-lg py-2 pl-7 pr-3 text-white font-bold outline-none transition-all shadow-inner"
                             type="number"
                             min="1"
-                            value={item.amount}
-                            onChange={(e) => updateBetAmount(item.event.id, item.outcome.id, Number(e.target.value))}
+                            value={item.amount || ''}
+                            onChange={(e) => updateBetAmount(item.event.id, item.outcome.id, Number(e.target.value) || 0)}
+                            placeholder="0"
                           />
                         </div>
                       </div>

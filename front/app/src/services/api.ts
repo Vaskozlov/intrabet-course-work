@@ -104,19 +104,11 @@ export const walletApi = {
   },
 
   deposit: async (amount: number): Promise<void> => {
-    // Mock implementation for lab purposes
-    const currentBalance = parseFloat(localStorage.getItem('balance') || '1000');
-    localStorage.setItem('balance', (currentBalance + amount).toString());
+    await api.post('/wallet/deposit', { amount });
   },
 
   withdraw: async (amount: number): Promise<void> => {
-    // Mock implementation for lab purposes
-    const currentBalance = parseFloat(localStorage.getItem('balance') || '1000');
-    if (currentBalance >= amount) {
-      localStorage.setItem('balance', (currentBalance - amount).toString());
-    } else {
-      throw new Error('Insufficient balance');
-    }
+    await api.post('/wallet/withdraw', { amount });
   },
 };
 
