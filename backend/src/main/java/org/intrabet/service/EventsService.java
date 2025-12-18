@@ -6,10 +6,7 @@ import org.intrabet.dto.CreatedEventDTO;
 import org.intrabet.dto.CreatedOutcomeDTO;
 import org.intrabet.dto.EventFinishDTO;
 import org.intrabet.lib.Result;
-import org.intrabet.repository.AdminLogRepository;
-import org.intrabet.repository.CategoryRepository;
-import org.intrabet.repository.EventRepository;
-import org.intrabet.repository.OutcomeRepository;
+import org.intrabet.repository.*;
 import org.intrabet.service.notifications.EventPublisher;
 import org.intrabet.service.notifications.UserPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,7 @@ public class EventsService {
     private final EventPublisher eventPublisher;
     private final UserPublisher userPublisher;
     private final AdminLogRepository adminLogRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public EventsService(
@@ -39,18 +37,23 @@ public class EventsService {
             OutcomeRepository outcomeRepository,
             EventPublisher eventPublisher,
             UserPublisher userPublisher,
-            AdminLogRepository adminLogRepository) {
+            AdminLogRepository adminLogRepository, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
         this.eventRepository = eventRepository;
         this.outcomeRepository = outcomeRepository;
         this.eventPublisher = eventPublisher;
         this.userPublisher = userPublisher;
         this.adminLogRepository = adminLogRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     @CacheEvict(value = "eventsCache", allEntries = true)
-    public Event createEvent(CreatedEventDTO createdEventDTO, User author) {
+    public Event createEvent(CreatedEventDTO createdEventDTO, Long authorId) {
+        User author = userRepository
+                .findById(authorId)
+                .orElseThrow();
+
         Event event = new Event();
 
         event.setTitle(createdEventDTO.getTitle());

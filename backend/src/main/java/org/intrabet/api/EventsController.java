@@ -45,7 +45,7 @@ public class EventsController {
             @AuthenticationPrincipal User user
     ) {
         try {
-            var event = eventsService.createEvent(eventDTO, user);
+            var event = eventsService.createEvent(eventDTO, user.getId());
 
             return ResponseEntity
                     .status(HttpStatus.CREATED)

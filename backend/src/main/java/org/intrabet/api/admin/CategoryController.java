@@ -28,7 +28,7 @@ public class CategoryController {
             @Valid @RequestBody CategoryDTO categoryDTO,
             @AuthenticationPrincipal User user
     ) {
-        var creationResult = categoryService.create(categoryDTO, user);
+        var creationResult = categoryService.create(categoryDTO, user.getId());
 
         if (creationResult.isError()) {
             return ResponseEntity
