@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Wallet from './pages/Wallet';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import AdminPanel from './pages/admin/AdminPanel';
 import CreateEvent from './pages/admin/CreateEvent';
 import FinishEvent from './pages/admin/FinishEvent';
@@ -18,6 +20,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/admin/event/create" element={<CreateEvent />} />
           <Route path="/admin/event/finish" element={<FinishEvent />} />

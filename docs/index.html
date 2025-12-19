@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrabet - Презентация информационной системы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF1F1F;
+            --primary-hover: #D61616;
+            --background-dark: #09090b;
+            --surface-dark: #18181b;
+            --accent-gray: #27272a;
+            --input-bg: #121214;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background-dark);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Background effects - точно как во фронтенде */
+        .bg-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-effect::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: var(--primary);
+            opacity: 0.05;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+
+        .bg-effect::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 40%;
+            height: 40%;
+            background: var(--primary);
+            opacity: 0.05;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+
+        .content {
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Title slide */
+        .title-slide .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .title-slide .logo-icon {
+            background: rgba(255, 31, 31, 0.1);
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 31, 31, 0.2);
+            box-shadow: 0 0 20px rgba(255, 31, 31, 0.3);
+        }
+
+        .title-slide h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .title-slide h1 .highlight {
+            color: var(--primary);
+            text-shadow: 0 0 30px rgba(255, 31, 31, 0.6);
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .title-slide .author {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Content slides */
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(255, 31, 31, 0.5);
+            font-weight: 900;
+        }
+
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            background: var(--surface-dark);
+            border: 1px solid var(--accent-gray);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 31, 31, 0.2);
+            transform: translateX(10px);
+        }
+
+        .feature-item .icon {
+            background: rgba(255, 31, 31, 0.1);
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 31, 31, 0.2);
+        }
+
+        .feature-item .text {
+            flex: 1;
+        }
+
+        .feature-item .title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-item .description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: var(--surface-dark);
+            border: 1px solid var(--accent-gray);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 31, 31, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .tech-card .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card .tech-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .tech-card .tech-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .screenshot-placeholder {
+            background: var(--surface-dark);
+            border: 2px dashed var(--accent-gray);
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            min-height: 400px;
+        }
+
+        .screenshot-placeholder .material-symbols-outlined {
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--surface-dark);
+            border: 1px solid var(--accent-gray);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation - стиль как кнопки во фронтенде */
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 31, 31, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 0 30px rgba(255, 31, 31, 0.6);
+            transform: scale(1.02);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.98);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--surface-dark);
+            border: 1px solid var(--accent-gray);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(255, 31, 31, 0.2);
+        }
+
+        .conclusion-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .conclusion-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .conclusion-item .number {
+            background: var(--primary);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(255, 31, 31, 0.5);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot-box {
+            background: var(--surface-dark);
+            border: 2px dashed var(--accent-gray);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .screenshot-box .material-symbols-outlined {
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .screenshot-box strong {
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .screenshot-image {
+            background: var(--surface-dark);
+            border: 2px solid var(--accent-gray);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(255, 31, 31, 0.1);
+        }
+
+        .screenshot-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 1rem;
+            background: var(--surface-dark);
+            text-align: center;
+        }
+
+        .screenshot-caption strong {
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .screenshot-caption div {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="bg-effect"></div>
+            <div class="content title-slide">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <span class="material-symbols-outlined" style="font-size: 3rem; color: var(--primary);">confirmation_number</span>
+                    </div>
+                </div>
+                <h1>Intra<span class="highlight">bet</span></h1>
+                <p class="subtitle">Информационная система для внутренних ставок университета</p>
+                <p class="author">Курсовой проект по дисциплине «Информационные системы»</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Актуальность -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Актуальность проекта</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2rem;">school</span>
+                        </div>
+                        <div class="text">
+                            <div class="title">Вовлечение студентов</div>
+                            <div class="description">Повышение интереса к университетским мероприятиям через игровую механику</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">
+                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2rem;">event</span>
+                        </div>
+                        <div class="text">
+                            <div class="title">Университетские события</div>
+                            <div class="description">Ставки на спортивные, культурные и академические мероприятия</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">
+                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2rem;">group</span>
+                        </div>
+                        <div class="text">
+                            <div class="title">Сообщество</div>
+                            <div class="description">Создание активного студенческого сообщества вокруг университетской жизни</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">
+                            <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2rem;">security</span>
+                        </div>
+                        <div class="text">
+                            <div class="title">Безопасность</div>
+                            <div class="description">Закрытая система только для студентов и сотрудников университета</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Цели и задачи -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Цели и задачи</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Цель проекта</h3>
+                        <div class="feature-item">
+                            <div class="icon">
+                                <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2rem;">flag</span>
+                            </div>
+                            <div class="text">
+                                <div class="description">Разработать информационную систему для организации внутренних ставок на университетские мероприятия с возможностью мониторинга и администрирования</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Задачи</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">check_circle</span>
+                                </div>
+                                <div class="text">
+                                    <div class="description">Разработать backend на Spring Boot</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">check_circle</span>
+                                </div>
+                                <div class="text">
+                                    <div class="description">Создать frontend на React</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">check_circle</span>
+                                </div>
+                                <div class="text">
+                                    <div class="description">Настроить мониторинг с Grafana</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">check_circle</span>
+                                </div>
+                                <div class="text">
+                                    <div class="description">Развернуть в Docker</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Архитектура -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Архитектура системы</h2>
+                <svg viewBox="0 0 1100 700" style="width: 100%; max-width: 1100px; margin: 2rem auto; display: block;">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#FF1F1F" />
+                        </marker>
+                        <marker id="arrowhead-gray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#9ca3af" />
+                        </marker>
+                    </defs>
+
+                    <!-- User/Browser -->
+                    <g transform="translate(460, 20)">
+                        <rect width="140" height="70" rx="10" fill="#18181b" stroke="#FF1F1F" stroke-width="2"/>
+                        <text x="70" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Browser</text>
+                        <text x="70" y="53" text-anchor="middle" fill="#9ca3af" font-size="11">Пользователь</text>
+                    </g>
+
+                    <!-- Nginx -->
+                    <g transform="translate(460, 130)">
+                        <rect width="140" height="70" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+                        <text x="70" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Nginx</text>
+                        <text x="70" y="53" text-anchor="middle" fill="#9ca3af" font-size="11">Reverse Proxy</text>
+                    </g>
+
+                    <!-- React Frontend -->
+                    <g transform="translate(90, 260)">
+                        <rect width="180" height="100" rx="10" fill="#18181b" stroke="#FF1F1F" stroke-width="2" filter="url(#glow)"/>
+                        <text x="90" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">React Frontend</text>
+                        <text x="90" y="50" text-anchor="middle" fill="#9ca3af" font-size="11">TypeScript</text>
+                        <text x="90" y="67" text-anchor="middle" fill="#9ca3af" font-size="11">TailwindCSS</text>
+                        <text x="90" y="84" text-anchor="middle" fill="#9ca3af" font-size="10">:3000</text>
+                    </g>
+
+                    <!-- Spring Boot Backend -->
+                    <g transform="translate(410, 260)">
+                        <rect width="180" height="100" rx="10" fill="#18181b" stroke="#FF1F1F" stroke-width="2" filter="url(#glow)"/>
+                        <text x="90" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Spring Boot</text>
+                        <text x="90" y="50" text-anchor="middle" fill="#9ca3af" font-size="11">Java 21</text>
+                        <text x="90" y="67" text-anchor="middle" fill="#9ca3af" font-size="11">Spring Security + JWT</text>
+                        <text x="90" y="84" text-anchor="middle" fill="#9ca3af" font-size="10">:8080</text>
+                    </g>
+
+                    <!-- PostgreSQL -->
+                    <g transform="translate(790, 260)">
+                        <rect width="140" height="100" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+                        <text x="70" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">PostgreSQL</text>
+                        <text x="70" y="55" text-anchor="middle" fill="#9ca3af" font-size="11">Database</text>
+                        <text x="70" y="75" text-anchor="middle" fill="#9ca3af" font-size="10">:5432</text>
+                    </g>
+
+                    <!-- Python Exporter -->
+                    <g transform="translate(790, 430)">
+                        <rect width="140" height="70" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+                        <text x="70" y="33" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Exporter</text>
+                        <text x="70" y="51" text-anchor="middle" fill="#9ca3af" font-size="11">Python</text>
+                    </g>
+
+                    <!-- Prometheus -->
+                    <g transform="translate(550, 550)">
+                        <rect width="140" height="70" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+                        <text x="70" y="33" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Prometheus</text>
+                        <text x="70" y="51" text-anchor="middle" fill="#9ca3af" font-size="11">Metrics</text>
+                    </g>
+
+                    <!-- Grafana -->
+                    <g transform="translate(350, 550)">
+                        <rect width="140" height="70" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+                        <text x="70" y="33" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Grafana</text>
+                        <text x="70" y="51" text-anchor="middle" fill="#9ca3af" font-size="11">Visualization</text>
+                    </g>
+
+                    <!-- Arrows -->
+                    <!-- Browser -> Nginx -->
+                    <line x1="530" y1="90" x2="530" y2="125" stroke="#FF1F1F" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Nginx -> Frontend -->
+                    <path d="M 470 200 L 240 255" stroke="#FF1F1F" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Nginx -> Backend -->
+                    <line x1="530" y1="200" x2="530" y2="255" stroke="#FF1F1F" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Frontend -> Backend (API) -->
+                    <line x1="270" y1="300" x2="405" y2="300" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)" stroke-dasharray="5,5"/>
+                    <text x="337" y="290" text-anchor="middle" fill="#9ca3af" font-size="10">REST API</text>
+
+                    <!-- Backend -> Frontend (SSE) -->
+                    <line x1="410" y1="330" x2="275" y2="330" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)" stroke-dasharray="5,5"/>
+                    <text x="342" y="350" text-anchor="middle" fill="#9ca3af" font-size="10">SSE</text>
+
+                    <!-- Backend -> PostgreSQL -->
+                    <line x1="590" y1="310" x2="785" y2="310" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+
+                    <!-- PostgreSQL -> Exporter -->
+                    <line x1="860" y1="360" x2="860" y2="425" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+
+                    <!-- Exporter -> Prometheus -->
+                    <line x1="820" y1="500" x2="690" y2="570" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+
+                    <!-- Prometheus -> Grafana -->
+                    <line x1="550" y1="585" x2="495" y2="585" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
+
+                    <!-- Docker Compose Label -->
+                    <rect x="60" y="640" width="900" height="40" rx="8" fill="none" stroke="#FF1F1F" stroke-width="2" stroke-dasharray="10,5"/>
+                    <text x="510" y="665" text-anchor="middle" fill="#FF1F1F" font-size="14" font-weight="bold">Docker Compose</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Slide 5: Технологический стек -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Технологический стек</h2>
+                <div class="tech-stack">
+                    <div class="tech-card">
+                        <div class="tech-icon">☕</div>
+                        <div class="tech-name">Backend</div>
+                        <div class="tech-desc">Java 21<br>Spring Boot 3.4<br>Spring Security<br>JWT Auth</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">⚛️</div>
+                        <div class="tech-name">Frontend</div>
+                        <div class="tech-desc">React 18<br>TypeScript<br>TailwindCSS<br>React Router</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">🗄️</div>
+                        <div class="tech-name">Database</div>
+                        <div class="tech-desc">PostgreSQL 16<br>Liquibase<br>JPA/Hibernate</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">📊</div>
+                        <div class="tech-name">Monitoring</div>
+                        <div class="tech-desc">Grafana<br>Prometheus<br>Custom Exporters</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">🐳</div>
+                        <div class="tech-name">DevOps</div>
+                        <div class="tech-desc">Docker<br>Docker Compose<br>Nginx</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">🔐</div>
+                        <div class="tech-name">Security</div>
+                        <div class="tech-desc">JWT Tokens<br>BCrypt<br>CORS Protection</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Функциональные возможности -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Функциональные возможности</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Для пользователей</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">login</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Регистрация и авторизация</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">event_available</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Просмотр событий</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">casino</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Размещение ставок</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">account_balance_wallet</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Управление балансом</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">history</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">История ставок</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Для администраторов</h3>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">add_circle</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Создание событий</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">done_all</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Завершение событий</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">query_stats</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Мониторинг системы</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 1.5rem;">view_list</span>
+                                </div>
+                                <div class="text">
+                                    <div class="title">Просмотр всех ставок</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Интерфейс пользователя -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Интерфейс пользователя</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot-image">
+                        <img src="main_page.png" alt="Главная страница">
+                        <div class="screenshot-caption">
+                            <strong>Главная страница</strong>
+                            <div>Список событий и размещение ставок</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-image">
+                        <img src="wallet_page.png" alt="Страница кошелька">
+                        <div class="screenshot-caption">
+                            <strong>Страница кошелька</strong>
+                            <div>Пополнение и вывод средств</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Панель администратора -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Панель администратора</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot-image">
+                        <img src="create_event.png" alt="Создание события">
+                        <div class="screenshot-caption">
+                            <strong>Создание события</strong>
+                            <div>Добавление новых мероприятий</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-image">
+                        <img src="finish_event.png" alt="Завершение события">
+                        <div class="screenshot-caption">
+                            <strong>Завершение события</strong>
+                            <div>Выбор исхода и выплаты</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Мониторинг Grafana -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Система мониторинга</h2>
+                <div class="screenshot-image" style="max-width: 1000px; margin: 2rem auto;">
+                    <img src="monitoring.png" alt="Дашборд Grafana">
+                    <div class="screenshot-caption">
+                        <strong>Дашборд Grafana</strong>
+                        <div>Визуализация ключевых метрик системы в реальном времени</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Заключение -->
+        <div class="slide">
+            <div class="bg-effect"></div>
+            <div class="content">
+                <h2>Заключение</h2>
+                <ul class="conclusion-list">
+                    <li class="conclusion-item">
+                        <div class="number">1</div>
+                        <div>Разработана полнофункциональная информационная система для внутренних ставок</div>
+                    </li>
+                    <li class="conclusion-item">
+                        <div class="number">2</div>
+                        <div>Реализована современная архитектура с разделением на frontend, backend и мониторинг</div>
+                    </li>
+                    <li class="conclusion-item">
+                        <div class="number">3</div>
+                        <div>Обеспечена безопасность через JWT-авторизацию и разграничение прав доступа</div>
+                    </li>
+                    <li class="conclusion-item">
+                        <div class="number">4</div>
+                        <div>Настроен мониторинг с визуализацией ключевых метрик в реальном времени</div>
+                    </li>
+                    <li class="conclusion-item">
+                        <div class="number">5</div>
+                        <div>Система готова к развертыванию и масштабированию благодаря Docker</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Назад
+            </button>
+            <button class="nav-btn" id="next-btn">
+                Вперёд
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('current-slide');
+        const totalSlidesEl = document.getElementById('total-slides');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            currentSlideEl.textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'f' || e.key === 'F11') {
+                e.preventDefault();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>

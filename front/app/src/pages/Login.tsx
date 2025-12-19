@@ -135,7 +135,7 @@ const Login: React.FC = () => {
         </div>
 
         <div className="mt-8 text-center text-xs text-gray-600">
-          © 2024 Intrabet. All rights reserved.
+          © 2025 Intrabet. All rights reserved.
         </div>
       </main>
     </div>

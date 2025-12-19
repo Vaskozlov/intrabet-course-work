@@ -168,10 +168,17 @@ const Register: React.FC = () => {
                     onChange={(e) => setAgreedToTerms(e.target.checked)}
                   />
                 </div>
-                <label className="text-xs text-gray-400 leading-relaxed cursor-pointer select-none" htmlFor="terms">
-                  Я соглашаюсь с <span className="text-primary hover:text-primary-hover hover:underline">Условиями использования</span> и{' '}
-                  <span className="text-primary hover:text-primary-hover hover:underline">Политикой конфиденциальности</span> Intrabet.
-                </label>
+                <div className="text-xs text-gray-400 leading-relaxed">
+                  Я соглашаюсь с{' '}
+                  <Link to="/terms" className="text-primary hover:text-primary-hover hover:underline" onClick={(e) => e.stopPropagation()}>
+                    Условиями использования
+                  </Link>{' '}
+                  и{' '}
+                  <Link to="/privacy" className="text-primary hover:text-primary-hover hover:underline" onClick={(e) => e.stopPropagation()}>
+                    Политикой конфиденциальности
+                  </Link>{' '}
+                  Intrabet.
+                </div>
               </div>
 
               <button
@@ -197,7 +204,7 @@ const Register: React.FC = () => {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-xs text-gray-600">© 2024 Intrabet. Все права защищены.</p>
+          <p className="text-xs text-gray-600">© 2025 Intrabet. Все права защищены.</p>
         </div>
       </main>
     </div>
