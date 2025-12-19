@@ -7,19 +7,19 @@ import org.intrabet.bean.User;
 import org.intrabet.dto.WalletOperationDTO;
 import org.intrabet.lib.Result;
 import org.intrabet.repository.WalletRepository;
-import org.intrabet.service.notifications.UserNotificationService;
+import org.intrabet.service.notifications.UserPublisher;
 
 import java.math.BigDecimal;
 
 @Service
 public class WalletService {
     private final WalletRepository walletRepository;
-    private final UserNotificationService userNotificationService;
+    private final UserPublisher UserPublisher;
 
     @Autowired
-    public WalletService(WalletRepository walletRepository, UserNotificationService userNotificationService) {
+    public WalletService(WalletRepository walletRepository, UserPublisher userPublisher) {
         this.walletRepository = walletRepository;
-        this.userNotificationService = userNotificationService;
+        this.UserPublisher = userPublisher;
     }
 
     @Transactional
@@ -29,7 +29,7 @@ public class WalletService {
 
         wallet.addBalance(amount);
         walletRepository.save(wallet);
-        userNotificationService.notifyAccountChange(user);
+        UserPublisher.notifyAccountChange(user);
 
         return Result.success(null);
     }
@@ -45,7 +45,7 @@ public class WalletService {
 
         wallet.setBalance(wallet.getBalance().subtract(amount));
         walletRepository.save(wallet);
-        userNotificationService.notifyAccountChange(user);
+        UserPublisher.notifyAccountChange(user);
 
         return Result.success(null);
     }
